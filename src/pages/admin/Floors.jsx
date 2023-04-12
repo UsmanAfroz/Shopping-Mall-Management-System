@@ -301,7 +301,6 @@ export default function Dashboard() {
                   <th className="font-normal text-left pl-11">Shop No</th>
                   <th className="font-normal text-left pl-10">Shop Name</th>
                   <th className="font-normal text-left">Shop Type</th>
-
                   <th className="font-normal text-left">Floor No</th>
                 </tr>
               </thead>
