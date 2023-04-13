@@ -13,8 +13,6 @@ export const logInUser = async (obj: Object) => {
 
 export const userExists = async (searchObject: object) => {
   const user = await User.findOne(searchObject);
-  console.log('p', searchObject)
-
   return user;
 };
 

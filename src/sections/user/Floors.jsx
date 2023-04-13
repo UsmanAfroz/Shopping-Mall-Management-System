@@ -28,30 +28,6 @@ import { Pagination } from "swiper";
 export default function Floors({ number, list, len }) {
   const navigate = useNavigate();
 
-  // const [usersDict, setUsersDict] = useState({});
-  // const [len, setLen] = useState(0);
-
-  // useEffect(() => {
-
-  //     axios.get(`http://localhost:2000/api/shop/getShops`)
-  //         .then(res => {
-  //             setLen(res.data.data.length)
-  //             const dict = res.data.data.reduce((acc, data) => {
-  //                 if (!acc[data['floorNumber']]) {
-  //                     acc[data['floorNumber']] = [data];
-  //                 } else {
-  //                     acc[data['floorNumber']].push(data);
-  //                 }
-  //                 return acc;
-  //             }, {});
-
-  //             setUsersDict(dict);
-
-  //         }).catch(err => {
-  //             console.log('Error:', err);
-  //         })
-
-  // }, [])
 
   return (
     <>
@@ -148,13 +124,6 @@ export default function Floors({ number, list, len }) {
                   </div>
                 </Link>
 
-                {/* <ShopCard
-                    id={i["_id"]}
-                    image={
-                      "https://image.cnbcfm.com/api/v1/image/107036059-1648140541349-gettyimages-1239350024-PWeaver-Target-01.jpeg?v=1654544436&w=1920&h=1080"
-                    }
-                    name={i["shopName"]}
-                  /> */}
               </SwiperSlide>
             ))}
           </Swiper>

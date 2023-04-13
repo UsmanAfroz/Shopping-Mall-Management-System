@@ -29,11 +29,11 @@ export default function Home() {
       .catch((err) => {
         console.log("Error:", err);
       });
-  }, []);
+  }, [usersDict]);
 
   return (
     <>
-    <MainHeader/>
+      <MainHeader />
       <Hero />
       <Features />
 
@@ -75,7 +75,7 @@ export default function Home() {
           <span className="ml-2">View More</span>
         </button>
       </center>
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -8,10 +8,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [type, setType] = useState('admin')
+  const handleOptionChange = (event) => setType(event.target.value);
+
   const login = () => {
     let jsn = {
       email: email,
       password: password,
+      userType: type
     };
 
     axios
@@ -80,6 +84,25 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+                <div class="mb-2 flex-row flex justify-between form-control w-full px-4 py-2 text-md font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                                    <section>
+                                        <label className="text-gray-400 text-md leading-tight tracking-normal mb-2">
+                                            User Type
+                                        </label>
+                                    </section>
+                                    <section>
+                                        <input type="radio" name="usertype" value="ADMIN"
+                                            checked={type === 'ADMIN'}
+                                            onChange={handleOptionChange}
+                                        /> Admin
+                                    </section>
+
+                                    <section>
+                                        <input type="radio" name="usertype" value="CUSTOMER"
+                                            checked={type === 'CUSTOMER'}
+                                            onChange={handleOptionChange} /> customer
+                                    </section>
+                                </div>
 
                 <div class="text-center lg:text-left">
                   <button
