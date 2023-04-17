@@ -27,7 +27,6 @@ export const Login = async (req: Request, res: Response) => {
                 timeAccountCreation: Date.now(),
                 createdAt: new Date().toLocaleString(),
             }
-            console.log('data',data)
             res.status(200).json(data);
         }
         //res.status(400).send("Invalid Credentials");

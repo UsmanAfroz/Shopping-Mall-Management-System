@@ -39,8 +39,6 @@ export default function Dashboard() {
         setTtlFloors(len)
         Object.keys(usersDict).map((k, index) => {
           setTtlShop(usersDict[k].length * len)
-
-
         }).catch(err => {
           console.log('Error:', err);
         })

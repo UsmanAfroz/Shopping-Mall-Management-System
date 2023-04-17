@@ -62,17 +62,14 @@ export const editProduct = async (req: Request, res: Response) => {
     const id: string = req.params.id;
     const file = req.file;
     const productData: IProducts = req.body;
-    
-    console.log('ID is ', id)
     if (!id) return res.send({ message: "ID is required in parameters", statusCode: 500 })
     try {
         if (req.file) {
             productData.images = file?.filename; // update the image filename/path
-          }
-         await update(id, productData);
-        
+        }
+        await update(id, productData);
         return res.send({ message: "data updated successfully", statusCode: 200 })
-    
+
     }
     catch (err: any) {
         return res.send({ statusCode: 500, message: err?.message })
@@ -80,16 +77,23 @@ export const editProduct = async (req: Request, res: Response) => {
 }
 
 export const createProduct = async (req: Request, res: Response) => {
-
-    const file = req.file;
+    const file = req.files;
     if (!file) {
         const error = new Error('Please upload a file');
         console.log(error)
     }
 
-
     const productData: IProducts = req.body;
-    productData.images = file?.filename;
+    let images: Array<string> = []
+
+    if (Array.isArray(file)) {
+        file.forEach(e => {
+            images.push(e.filename)
+        });
+    }
+
+    productData.images = images;
+
 
     try {
         const product = await addProducts(productData);
