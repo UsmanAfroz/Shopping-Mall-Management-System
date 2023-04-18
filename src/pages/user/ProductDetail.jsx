@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { RadioGroup } from "@headlessui/react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TitleCard from "../../components/Cards/user/TitleCard";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
-import axios from "axios";
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
-import {
-  CurrencyDollarIcon,
-  GlobeAmericasIcon,
-} from "@heroicons/react/24/outline";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -70,14 +65,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function ProductDetail() {
-  
   const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
   const id = localStorage.getItem("p_id");
   const [data, setData] = useState([]);
-  const [image,setImage] = useState();
+  const [image, setImage] = useState();
 
   useEffect(() => {
     let url = `http://localhost:2000/api/product/getProductwithPk/${id}`;
@@ -85,7 +79,7 @@ export default function ProductDetail() {
       .get(url)
       .then((r) => {
         setData(r.data.data);
-        setImage(`http://localhost:2000/uploads/${r.data.data.images[0]}`)
+        setImage(`http://localhost:2000/uploads/${r.data.data.images[0]}`);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -137,43 +131,41 @@ export default function ProductDetail() {
 
       <div className="bg-white">
         <div className="pt-6">
-      
-           <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-           <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-             {/* src={`http://localhost:2000/uploads/${data.images[0]}`} */}
-             <img
-               src={image}
-               alt={product.images[0].alt}
-               className="h-full w-full object-cover object-center"
-             />
-           </div>
-           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-             <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-               <img
-                 src={image}
-                 alt={product.images[1].alt}
-                 className="h-full w-full object-cover object-center"
-               />
-             </div>
-             <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-               <img
-                 src={image}
-                 alt={product.images[2].alt}
-                 className="h-full w-full object-cover object-center"
-               />
-             </div>
-           </div>
-           <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-             <img
-               src={image}
-               alt={product.images[3].alt}
-               className="h-full w-full object-cover object-center"
-             />
-           </div>
-         </div>
-        
+          <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+            <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+              <img
+                src={image}
+                alt={product.images[0].alt}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+            <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+              <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                <img
+                  src={image}
+                  alt={product.images[1].alt}
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+              <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+                <img
+                  src={image}
+                  alt={product.images[2].alt}
+                  className="h-full w-full object-cover object-center"
+                />
+              </div>
+            </div>
+            <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+              <img
+                src={image}
+                alt={product.images[3].alt}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+          </div>
+
           {/* Image gallery */}
-         
+
           {/* Product info */}
           <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
@@ -345,9 +337,9 @@ export default function ProductDetail() {
                 </div>
 
                 <button
-                  onClick={()=>addCart(data)}
+                  onClick={() => addCart(data)}
                   type="submit"
-                  className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="mt-10 flex w-full items-center justify-center cursor-pointer rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Add to cart
                 </button>
@@ -397,4 +389,3 @@ export default function ProductDetail() {
     </>
   );
 }
-

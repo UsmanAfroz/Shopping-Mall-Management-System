@@ -204,7 +204,7 @@ export default function AddShop() {
             <input
               onClick={submit}
               type="submit"
-              className="text-white bg-indigo-700 font-normal w-64 h-10  text-center text-sm border-gray-300 rounded border shadow cursor-pointer"
+              className="text-white bg-indigo-700 cursor-pointer font-normal w-64 h-10  text-center text-sm border-gray-300 rounded border shadow cursor-pointer"
             />
           </div>
         </div>

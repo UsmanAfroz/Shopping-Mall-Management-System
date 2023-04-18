@@ -169,7 +169,6 @@ const UserProduct = () => {
   return (
     <>
       <MainHeader />
-
       {products && products.length ? (
         <>
           <TitleCard name={"Products"} />
@@ -217,62 +216,6 @@ const UserProduct = () => {
                           <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
                       </div>
-
-                      {/* Filters */}
-                      {/* <form className="mt-4">
-                {filters.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.name}
-                    className="border-t border-gray-200 pt-4 pb-4"
-                  >
-                    {({ open }) => (
-                      <fieldset>
-                        <legend className="w-full px-2">
-                          <Disclosure.Button className="flex w-full items-center justify-between p-2 text-gray-400 hover:text-gray-500">
-                            <span className="text-sm font-medium text-gray-900">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex h-7 items-center">
-                              <ChevronDownIcon
-                                className={classNames(
-                                  open ? "-rotate-180" : "rotate-0",
-                                  "h-5 w-5 transform"
-                                )}
-                                aria-hidden="true"
-                              />
-                            </span>
-                          </Disclosure.Button>
-                        </legend>
-                        <Disclosure.Panel className="px-4 pt-4 pb-2">
-                          <div className="space-y-6">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`${section.id}-${optionIdx}-mobile`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label
-                                  htmlFor={`${section.id}-${optionIdx}-mobile`}
-                                  className="ml-3 text-sm text-gray-500"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </fieldset>
-                    )}
-                  </Disclosure>
-                ))}
-              </form> */}
                     </Dialog.Panel>
                   </Transition.Child>
                 </div>
@@ -285,7 +228,7 @@ const UserProduct = () => {
                   spaceBetween={30}
                   centeredSlides={true}
                   autoplay={{
-                    delay: 1000,
+                    delay: 2000,
                     disableOnInteraction: false,
                   }}
                   pagination={{
@@ -303,8 +246,7 @@ const UserProduct = () => {
                   </SwiperSlide>
                   <SwiperSlide>
                     <img
-                      src="
-          https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      src="https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                       alt=""
                     />
                   </SwiperSlide>
@@ -370,142 +312,54 @@ const UserProduct = () => {
                       aria-hidden="true"
                     />
                   </button>
-
-                  {/* <div className="hidden lg:block">
-            <form className="space-y-10 divide-y divide-gray-200">
-              {filters.map((section, sectionIdx) => (
-                <div
-                  key={section.name}
-                  className={sectionIdx === 0 ? null : "pt-10"}
-                >
-                  <fieldset>
-                    <legend className="block text-sm font-medium text-gray-900">
-                      {section.name}
-                    </legend>
-                    <div className="space-y-3 pt-6">
-                      {section.options.map((option, optionIdx) => (
-                        <div
-                          key={option.value}
-                          className="flex items-center"
-                        >
-                          <input
-                            id={`${section.id}-${optionIdx}`}
-                            name={`${section.id}[]`}
-                            defaultValue={option.value}
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          />
-                          <label
-                            htmlFor={`${section.id}-${optionIdx}`}
-                            className="ml-3 text-sm text-gray-600"
-                          >
-                            {option.label}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-                  </fieldset>
-                </div>
-              ))}
-            </form>
-          </div> */}
                 </aside>
 
                 {/* Product grid */}
-                <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3">
+                <div className="mt-6 lg:col-span-2 lg:mt-0 xl:col-span-3 cursor-pointer">
                   <section class="text-gray-600 body-font">
                     <div class="container px-5 py-8 mx-auto">
                       <div class="flex flex-wrap -m-4">
                         {products.map((i) => (
-                          // <div class="lg:w-1/4 md:w-1/2 p-4 w-full ">
-                          //   <a class="block relative h-48 rounded overflow-hidden">
-                          //     <img
-                          //       onClick={() => {
-                          //         localStorage.setItem("p_id", i["_id"]);
-                          //         navigate("/productDetail");
-                          //       }}
-                          //       alt="ecommerce"
-                          //       class="object-cover object-center w-full h-full block"
-                          //       src={`http://localhost:2000/uploads/${i["images"][0]}`}
-                          //     />
-                          //   </a>
-                          //   <div class="mt-4 bg-blue-500">
-                          //     <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                          //       {i["brandName"]}
-                          //     </h3>
-                          //     <h1 class="text-gray-900 title-font text-lg font-medium">
-                          //       {i["title"]}
-                          //     </h1>
-                          //     <h2 class="text-gray-900 title-font text-md font-medium">
-                          //       Status: {i["status"]}
-                          //     </h2>
-                          //     <p class="mt-1">Price:${i["Price"]}</p>
-                          //     <button
-                          //       onClick={() => addCart(i)}
-                          //       className="bg-blue-600 hover:bg-blue-900 text-white px-2 py-1 rounded-sm float-right"
-                          //     >
-                          //       add to cart
-                          //     </button>
-                          //   </div>
-                          // </div>
-
-                          <div class=" m-3 w-56 transform overflow-hidden cursor-pointer rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+                          <div class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
                             <Swiper
                               spaceBetween={30}
                               centeredSlides={true}
                               // autoplay={{
-                              //   delay: 000,
+                              //   delay: 2000,
                               //   disableOnInteraction: false,
                               // }}
                               pagination={{
                                 clickable: true,
                               }}
                               navigation={true}
-                              modules={[Autoplay, Pagination, Navigation]}
-                              class="h-48 w-full object-cover object-center"
+                              modules={[Autoplay, Navigation]}
                             >
                               {i.images.map((e, index) => (
-                                <SwiperSlide>
+                                <SwiperSlide className="swipe">
                                   <img
                                     src={`http://localhost:2000/uploads/${i["images"][index]}`}
                                     alt="Product Image"
+                                    className="h-40"
                                   />
                                 </SwiperSlide>
                               ))}
                             </Swiper>
-
-                            {/* <img
-                              onClick={() => {
-                                localStorage.setItem("p_id", i["_id"]);
-                                navigate("/productDetail");
-                              }}
-                              class="h-48 w-full object-cover object-center"
-                              src={`http://localhost:2000/uploads/${i["images"][0]}`}
-                              alt="Product Image"
-                            /> */}
                             <div class="p-4">
                               <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">
                                 {i["title"]}
                               </h2>
 
-                              {i["status"] === "available" ? (
-                                <h2 class="mb-2 text-xs font-medium bg-gray-500 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
-                                  {i["status"]}
-                                </h2>
-                              ) : (
-                                <h2 class="mb-2 text-xs font-medium bg-red-800 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
-                                  {i["status"]}
-                                </h2>
-                              )}
+                              <h2 class="mb-2 text-xs font-medium bg-gray-500 w-fit p-1 text-center rounded-md dark:text-white text-gray-900">
+                                {i["status"]}
+                              </h2>
 
-                              <p class="mb-2 truncate text-base dark:text-gray-300 text-gray-700">
+                              <p class="mb-2 truncate  dark:text-gray-300 text-gray-700">
                                 {i["description"]}
                               </p>
                               <div class="flex items-center">
                                 <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">
                                   {i["Price"]} PKR
                                 </p>
-
                                 <button
                                   onClick={() => addCart(i)}
                                   class="ml-auto text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-2 py-1 rounded-lg"
@@ -529,22 +383,6 @@ const UserProduct = () => {
           <h1>No products to show </h1>
         </div>
       )}
-
-      {/* <section class="text-gray-400 body-font">
-        <div class="container px-5 py-24 mx-auto ">
-          <div class="flex flex-wrap -m-4 justify-around">
-            {products.map((product) => (
-              <ProductCard
-                id={product["_id"]}
-                brandName={product["brandName"]}
-                image={`http://localhost:2000/uploads/${product["images"][0]}`}
-                title={product["title"]}
-                price={product["Price"]}
-              />
-            ))}
-          </div>
-        </div>
-      </section> */}
       <Footer />
     </>
   );

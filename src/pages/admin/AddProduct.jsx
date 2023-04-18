@@ -208,7 +208,7 @@ export default function AddProduct() {
             <input
               onClick={submit}
               type="submit"
-              className="text-white bg-indigo-700 font-normal w-64 h-10  text-center text-sm border-gray-300 rounded border shadow"
+              className="text-white bg-indigo-700 cursor-pointer font-normal w-64 h-10  text-center text-sm border-gray-300 rounded border shadow"
             />
           </div>
         </div>
