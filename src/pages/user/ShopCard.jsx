@@ -28,12 +28,9 @@ export default function ShopCard({
                 <section className="flex flex-row">
                   <div
                     onClick={() => {
-                      console.log("here", id);
                       localStorage.setItem("Id", id);
                       navigate("/addShop");
-                      //to shop
                     }}
-                    className=""
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -28,7 +28,6 @@ export default function AddProduct() {
       : `http://localhost:2000/api/product/editProduct/${id}`;
 
   useEffect(() => {
-    console.log("url", URL);
     if (id !== null && id !== "id") {
       let url = `http://localhost:2000/api/product/getProductwithPk/${id}`;
       axios
@@ -69,7 +68,6 @@ export default function AddProduct() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           navigate("/dashboard");
         })
         .catch((error) => {
@@ -83,7 +81,6 @@ export default function AddProduct() {
           },
         })
         .then((response) => {
-          console.log(response.data);
           navigate("/dashboard");
         })
         .catch((error) => {

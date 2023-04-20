@@ -1,20 +1,9 @@
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { useEffect, useState } from "react";
 
-import slide1 from "../../assets/images/slide-1.jpg";
-import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-import ShopCard from "../../components/Cards/user/ShopCard";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -26,9 +15,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 
 export default function Floors({ number, list, len }) {
-  const navigate = useNavigate();
-
-
   return (
     <>
       <div className=" mx-auto">
@@ -123,7 +109,6 @@ export default function Floors({ number, list, len }) {
                     </div>
                   </div>
                 </Link>
-
               </SwiperSlide>
             ))}
           </Swiper>

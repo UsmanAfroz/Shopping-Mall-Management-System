@@ -22,7 +22,6 @@ export default function Products() {
     axios
       .delete(url)
       .then((res) => {
-        console.log("deleted", res.data);
         loadData();
       })
       .catch((err) => console.log("err", err));
@@ -35,7 +34,6 @@ export default function Products() {
       )
       .then((res) => {
         setData(res.data.data);
-        console.log("DATA", data);
       })
       .catch((err) => console.log(err));
   };

@@ -14,7 +14,7 @@ function Footer() {
                 <div className="flex justify-center flex-col">
                   <div className="xl:mt-8">
                     <p className="text-gray-600 dark:text-gray-300 text-sm leading-normal">
-                      Copyright © 2021 Zelly.
+                      Copyright © 2023 Zelly.
                     </p>
                   </div>
                   <div className="mt-2">

@@ -9,6 +9,7 @@ import axios from "axios";
 export default function Home() {
   const [usersDict, setUsersDict] = useState({});
   const [len, setLen] = useState(0);
+  const [count, setCount] = useState(2);
 
   useEffect(() => {
     axios
@@ -29,7 +30,12 @@ export default function Home() {
       .catch((err) => {
         console.log("Error:", err);
       });
-  }, [usersDict]);
+  }, []);
+
+  let floors = Object.keys(usersDict).slice(0, count);
+  const viewMoreHandler = () => {
+    setCount(count + count);
+  };
 
   return (
     <>
@@ -44,7 +50,7 @@ export default function Home() {
         </b>
         <div className="h-0.5 w-1/12 bg-black ml-6"></div>
       </div>
-      {Object.keys(usersDict).map((k) => (
+      {floors.map((k) => (
         <>
           <Floors number={k} list={usersDict[k]} len={len} />
         </>
@@ -72,7 +78,9 @@ export default function Home() {
             />
           </svg>
 
-          <span className="ml-2">View More</span>
+          <span className="ml-2" onClick={viewMoreHandler}>
+            View More
+          </span>
         </button>
       </center>
       <Footer />

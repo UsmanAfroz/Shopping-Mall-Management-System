@@ -1,52 +1,43 @@
-import React, { useEffect, useState } from "react";
-import FloorCard from "../../components/Cards/FloorCard";
-//import AddCard from '../../components/Cards/AddCard';
-import axios from 'axios';
-import AdminHeader from "../../components/header/AdminHeader";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import TitleCard from "../../components/Cards/TitleCard";
-
-//import { useNavigate } from 'react-router-dom';
+import AdminHeader from "../../components/header/AdminHeader";
 
 export default function Dashboard() {
-  const [show, setShow] = useState(null);
-  //let navigate = useNavigate();
   const [usersDict, setUsersDict] = useState({});
   const [ttlShops, setTtlShop] = useState();
   const [ttlFloors, setTtlFloors] = useState();
-  const [tmp,setTmp] = useState([]);
+  const [tmp, setTmp] = useState([]);
 
   useEffect(() => {
-    getLenths()
-  }, [ttlFloors, ttlFloors])
-
+    getLenths();
+  }, [ttlFloors, ttlFloors]);
 
   const getLenths = async () => {
-    await axios.get(`http://localhost:2000/api/shop/getShops`)
-      .then(res => {
-        setTmp(res.data.data)
-        const dict = res.data.data.reduce((acc, data) => {
-          if (!acc[data['floorNumber']]) {
-            acc[data['floorNumber']] = [data];
-          } else {
-            acc[data['floorNumber']].push(data);
-          }
-          return acc;
-        }, {});
+    await axios.get(`http://localhost:2000/api/shop/getShops`).then((res) => {
+      setTmp(res.data.data);
+      const dict = res.data.data.reduce((acc, data) => {
+        if (!acc[data["floorNumber"]]) {
+          acc[data["floorNumber"]] = [data];
+        } else {
+          acc[data["floorNumber"]].push(data);
+        }
+        return acc;
+      }, {});
 
-        setUsersDict(dict);
+      setUsersDict(dict);
 
-        let len = Object.keys(usersDict).length
-        setTtlFloors(len)
-        Object.keys(usersDict).map((k, index) => {
-          setTtlShop(usersDict[k].length * len)
-        }).catch(err => {
-          console.log('Error:', err);
+      let len = Object.keys(usersDict).length;
+      setTtlFloors(len);
+      Object.keys(usersDict)
+        .map((k, index) => {
+          setTtlShop(usersDict[k].length * len);
         })
-
-
-      })
-  }
-
+        .catch((err) => {
+          console.log("Error:", err);
+        });
+    });
+  };
 
   return (
     <>
@@ -295,14 +286,13 @@ export default function Dashboard() {
             <table className="w-full whitespace-nowrap">
               <thead>
                 <tr className="h-20 w-full text-sm leading-none text-gray-600">
-                <th className="font-normal text-left pl-11">#</th>
+                  <th className="font-normal text-left pl-11">#</th>
                   <th className="font-normal text-left pl-11">Shop No</th>
                   <th className="font-normal text-left pl-10">Shop Name</th>
                   <th className="font-normal text-left">Shop Type</th>
                   <th className="font-normal text-left">Floor No</th>
                 </tr>
               </thead>
-
 
               <tbody className="w-full">
                 {/* {
@@ -349,43 +339,33 @@ export default function Dashboard() {
                   ))
                 } */}
 
-                {
-                  tmp.map((i,index)=>(
-                    <>
-                    <tr  className="h-20 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white ">
-                    <td><p className="mr-16 pl-10">{index+1}</p></td>
-                      <td><p className="mr-16 pl-10">{i['shopNumber']}</p></td>
-                      <td><p className="mr-16 pl-10">{i['shopName']}</p></td>
-                      <td><p className="mr-16 pl-10">{i['shopType']}</p></td>
-                      <td><p className="mr-16 pl-10">{i['floorNumber']}</p></td>
+                {tmp.map((i, index) => (
+                  <>
+                    <tr className="h-20 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white ">
+                      <td>
+                        <p className="mr-16 pl-10">{index + 1}</p>
+                      </td>
+                      <td>
+                        <p className="mr-16 pl-10">{i["shopNumber"]}</p>
+                      </td>
+                      <td>
+                        <p className="mr-16 pl-10">{i["shopName"]}</p>
+                      </td>
+                      <td>
+                        <p className="mr-16 pl-10">{i["shopType"]}</p>
+                      </td>
+                      <td>
+                        <p className="mr-16 pl-10">{i["floorNumber"]}</p>
+                      </td>
                     </tr>
-                    </>
-                  ))
-                }
-
-
-
-
+                  </>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </>
-      {/* <section class="text-gray-600 body-font my-10">
-                <div class="container px-5 mx-auto">
-                    <div class="flex flex-wrap -m-4 ">
-                        <FloorCard />
 
-                    </div>
-                </div>
-            </section> */}
-      {/* <section class="text-gray-600 body-font my-10">
-                <div class="container px-5 mx-auto">
-                    <div class="flex flex-wrap -m-4">
-                        <AddCard />
-                    </div>
-                </div>
-            </section> */}
     </>
   );
 }

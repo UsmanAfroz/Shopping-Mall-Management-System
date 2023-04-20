@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
 import {
-  CheckIcon,
-  ClockIcon,
-  QuestionMarkCircleIcon,
-  XMarkIcon,
+  CheckIcon, XMarkIcon
 } from "@heroicons/react/20/solid";
+import { useEffect, useState } from "react";
 
-import MainHeader from "../../components/header/MainHeader";
-import Footer from "../../sections/user/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../../components/header/MainHeader";
+import Footer from "../../sections/user/Footer";
+import "./styles.css";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -42,11 +40,9 @@ const Cart = () => {
 
   const remove = async (id, ind) => {
     try {
-      console.log(id, id);
       let ob = await axios.delete(
         `http://localhost:2000/api/cart/deleteTemp/${id}`
       );
-      console.log("ob", ob.data.data);
       if (ob.data) {
         const filterItem = data.filter((i) => i["_id"] !== id);
         setData(filterItem);
@@ -84,7 +80,7 @@ const Cart = () => {
   return (
     <>
       <MainHeader />
-      <div className="bg-white">
+      <div className="bg-white shopping-cart">
         <div className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Shopping Cart

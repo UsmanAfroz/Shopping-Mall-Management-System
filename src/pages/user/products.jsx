@@ -1,128 +1,47 @@
+import { Dialog, Transition } from "@headlessui/react";
+import { PlusIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import ProductCard from "../../components/Cards/user/ProductCard";
+import React, { Fragment, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import TitleCard from "../../components/Cards/user/TitleCard";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
-import TitleCard from "../../components/Cards/user/TitleCard";
-import { Fragment } from "react";
-import { Dialog, Disclosure, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import "./styles.css";
 import { Autoplay, Navigation, Pagination } from "swiper";
-// const filters = [
-//   {
-//     id: "color",
-//     name: "Color",
-//     options: [
-//       { value: "white", label: "White" },
-//       { value: "beige", label: "Beige" },
-//       { value: "blue", label: "Blue" },
-//       { value: "brown", label: "Brown" },
-//       { value: "green", label: "Green" },
-//       { value: "purple", label: "Purple" },
-//     ],
-//   },
-//   {
-//     id: "category",
-//     name: "Category",
-//     options: [
-//       { value: "new-arrivals", label: "All New Arrivals" },
-//       { value: "tees", label: "Tees" },
-//       { value: "crewnecks", label: "Crewnecks" },
-//       { value: "sweatshirts", label: "Sweatshirts" },
-//       { value: "pants-shorts", label: "Pants & Shorts" },
-//     ],
-//   },
-//   {
-//     id: "sizes",
-//     name: "Sizes",
-//     options: [
-//       { value: "xs", label: "XS" },
-//       { value: "s", label: "S" },
-//       { value: "m", label: "M" },
-//       { value: "l", label: "L" },
-//       { value: "xl", label: "XL" },
-//       { value: "2xl", label: "2XL" },
-//     ],
-//   },
-// ];
+import "./styles.css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const userProducts = [
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  // More products...
-];
 
 const UserProduct = () => {
   const navigate = useNavigate();
-  console.log("here");
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = state;
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const location = useLocation();
   const { id } = useParams();
-  console.log("🚀  ~ file: products.jsx:12 ~ UserProduct ~ params:", id);
 
   const [products, setProducts] = useState([]);
   let url = `http://localhost:2000/api/product/getUserProducts/${id}`;
-  console.log("URL", products);
 
   useEffect(() => {
-    console.log("URL", url);
     axios
       .get(url)
       .then((res) => {
         setProducts(res.data.data);
-        console.log("DATA", products);
       })
       .catch((err) => console.log("Err", err));
   }, []);
@@ -158,13 +77,18 @@ const UserProduct = () => {
         axios
           .post(`http://localhost:2000/api/cart/addTemp`, jsn)
           .then((r) => {
-            console.log("r", r.data);
+            if (r.status === 200) {
+              setState({ open: true });
+            }
           })
           .catch((er) => console.log("er", er));
 
         break;
       }
     }
+  };
+  const handleClose = () => {
+    setState({ ...state, open: false });
   };
   return (
     <>
@@ -320,14 +244,20 @@ const UserProduct = () => {
                     <div class="container px-5 py-8 mx-auto">
                       <div class="flex flex-wrap -m-4">
                         {products.map((i) => (
-                          <div class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+                          <div
+                            class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
+                            onClick={() => {
+                              localStorage.setItem("p_id", i._id);
+                              // navigate("/productDetail");
+                            }}
+                          >
                             <Swiper
                               spaceBetween={30}
                               centeredSlides={true}
-                              // autoplay={{
-                              //   delay: 2000,
-                              //   disableOnInteraction: false,
-                              // }}
+                              autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                              }}
                               pagination={{
                                 clickable: true,
                               }}
@@ -379,11 +309,23 @@ const UserProduct = () => {
           </div>
         </>
       ) : (
-        <div className="text-xl font-large justify-center items-center flex p-5">
+        <div className="text-xl font-large justify-center items-center flex p-5 shopping-cart">
           <h1>No products to show </h1>
         </div>
       )}
       <Footer />
+
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Product added to cart successfully.
+        </Alert>
+      </Snackbar>
     </>
   );
 };

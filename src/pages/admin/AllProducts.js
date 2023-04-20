@@ -11,7 +11,6 @@ export default function AllProducts() {
   let token = localStorage.getItem("token");
 
   useEffect(() => {
-    console.log(token);
     load();
   }, []);
 

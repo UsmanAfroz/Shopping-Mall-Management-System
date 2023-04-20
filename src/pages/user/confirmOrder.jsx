@@ -1,10 +1,8 @@
-import React from "react";
-import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import { CheckCircleIcon, TrashIcon } from "@heroicons/react/20/solid";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
-import axios from "axios";
 
 const deliveryMethods = [
   {

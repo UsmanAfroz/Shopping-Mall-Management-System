@@ -42,3 +42,7 @@ body {
 .swipe-image{
   height: 170px; 
 }
+
+.shopping-cart {
+  min-height: 659px
+}
