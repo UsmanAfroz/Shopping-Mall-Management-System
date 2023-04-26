@@ -248,7 +248,7 @@ const UserProduct = () => {
                             class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
                             onClick={() => {
                               localStorage.setItem("p_id", i._id);
-                              // navigate("/productDetail");
+                              navigate("/productDetail");
                             }}
                           >
                             <Swiper

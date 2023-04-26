@@ -106,7 +106,7 @@ export default function Signup() {
                       checked={type === "ADMIN"}
                       onChange={handleOptionChange}
                     />{" "}
-                    Admin
+                    Shop Manager
                   </section>
 
                   <section>
@@ -117,7 +117,7 @@ export default function Signup() {
                       checked={type === "CUSTOMER"}
                       onChange={handleOptionChange}
                     />{" "}
-                    customer
+                    Customer
                   </section>
                 </div>
                 <div class="mb-2">
@@ -164,6 +164,13 @@ export default function Signup() {
                     class="inline-block px-7 cursor-pointer py-3 bg-blue-600 text-white font-medium text-md leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   >
                     Signup
+                  </button>
+                  <button
+                    type="button"
+                    onClick={()=>navigate("/")}
+                    class="inline-block px-7 ml-3 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  >
+                    Cancel
                   </button>
                 </div>
               </form>

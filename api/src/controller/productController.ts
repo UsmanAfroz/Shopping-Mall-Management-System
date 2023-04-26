@@ -16,11 +16,9 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const getProductByID = async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    console.log('ID', id)
     if (!id) return res.send({ message: "ID is required in parameters", statusCode: 500 })
     try {
         const product = await getSingleProduct(id);
-        console.log('data', product)
         return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {
@@ -31,11 +29,9 @@ export const getProductByID = async (req: Request, res: Response) => {
 
 export const getUserProducts = async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    console.log('ID', id)
     if (!id) return res.send({ message: "ID is required in parameters", statusCode: 500 })
     try {
         const product = await getSingleProduct(id);
-        console.log('data', product)
         return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {
@@ -45,11 +41,9 @@ export const getUserProducts = async (req: Request, res: Response) => {
 
 export const getProductwithPk = async (req: Request, res: Response) => {
     const id: string = req.params.id;
-    console.log('ID', id)
     if (!id) return res.send({ message: "ID is required in parameters", statusCode: 500 })
     try {
         const product = await getSingleProductId(id);
-        console.log('data', product)
         return res.send({ statusCode: 200, data: product })
     }
     catch (err: any) {
