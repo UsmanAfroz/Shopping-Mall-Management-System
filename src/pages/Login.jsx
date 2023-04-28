@@ -22,13 +22,17 @@ export default function Login() {
       .post("http://localhost:2000/api/user/login", jsn)
       .then((res) => {
         localStorage.setItem("token", res.data["token"]);
-        localStorage.setItem("uid", res.data["_id"]);
+        localStorage.setItem("uid", res.data["id"]);
         switch (res.data["userType"]) {
           case "CUSTOMER": {
             navigate("/");
             break;
           }
 
+          case "SHOPKEEPER": {
+            navigate("/dashboard");
+            break;
+          }
           case "ADMIN": {
             navigate("/dashboard");
             break;
@@ -102,11 +106,22 @@ export default function Login() {
                     <input
                       type="radio"
                       name="usertype"
+                      value="SHOPKEEPER"
+                      checked={type === "SHOPKEEPER"}
+                      onChange={handleOptionChange}
+                    />{" "}
+                    Shop Keeper
+                  </section>
+
+                  <section>
+                    <input
+                      type="radio"
+                      name="usertype"
                       value="CUSTOMER"
                       checked={type === "CUSTOMER"}
                       onChange={handleOptionChange}
                     />{" "}
-                    customer
+                    Customer
                   </section>
                 </div>
 
@@ -120,7 +135,7 @@ export default function Login() {
                   </button>
                   <button
                     type="button"
-                    onClick={()=>navigate("/")}
+                    onClick={() => navigate("/")}
                     class="inline-block px-7 ml-3 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   >
                     Cancel

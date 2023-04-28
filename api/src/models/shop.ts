@@ -9,6 +9,7 @@ const shopSchema = new Schema({
     shopType: { type: String, required: true },
     isArchive: { type: Boolean, default: false },
     ownerPersonalInformation: {
+        OwnerId: String,
         firstName: String,
         lastName: String,
         dob: String,

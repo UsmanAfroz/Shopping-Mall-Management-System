@@ -8,12 +8,11 @@ export const shops = async () => {
 
 export const getSingleShop = async (id: string) => {
     const shop = await Shop.findById({ '_id': id })
-    if (!shop) return 'no product found ';
+    if (!shop) return 'no Shop found ';
     return shop;
 }
 
 export const addShop = async (shopData: object) => {
-    console.log('data', shopData)
     const shop = new Shop(shopData);
     await shop.save()
         .then(res => console.log('RES', res))
@@ -44,4 +43,9 @@ export const deleteShop = async (id: any) => {
     return del;
 }
 
+export const getUserShops = async (id: string) => {
+    const shop = await Shop.find({ 'ownerPersonalInformation.OwnerId': id })
+    if (!shop) return 'no Shop found ';
+    return shop;
+}
 

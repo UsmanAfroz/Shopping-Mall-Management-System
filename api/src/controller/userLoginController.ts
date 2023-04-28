@@ -1,7 +1,7 @@
+import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import Jwt from "jsonwebtoken";
-import bcrypt from 'bcrypt';
-import { userExists, logInUser } from '../services/user_Service';
+import { userExists } from '../services/user_Service';
 
 export const Login = async (req: Request, res: Response) => {
     const { email, password, userType } = req.body;
@@ -20,6 +20,7 @@ export const Login = async (req: Request, res: Response) => {
                 }
             );
             const data = {
+                id: user._id,
                 token,
                 email,
                 userType: user?.userType,

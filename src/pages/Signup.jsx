@@ -106,7 +106,17 @@ export default function Signup() {
                       checked={type === "ADMIN"}
                       onChange={handleOptionChange}
                     />{" "}
-                    Shop Manager
+                    ADMIN
+                  </section>
+                  <section>
+                    <input
+                      type="radio"
+                      name="usertype"
+                      value="SHOPKEEPER"
+                      checked={type === "SHOPKEEPER"}
+                      onChange={handleOptionChange}
+                    />{" "}
+                    Shop Keeeper
                   </section>
 
                   <section>
@@ -167,7 +177,7 @@ export default function Signup() {
                   </button>
                   <button
                     type="button"
-                    onClick={()=>navigate("/")}
+                    onClick={() => navigate("/")}
                     class="inline-block px-7 ml-3 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   >
                     Cancel
