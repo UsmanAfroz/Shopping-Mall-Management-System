@@ -67,7 +67,7 @@ export default function AdminHeader() {
                   </g>
                 </svg>
               </li>
-              <NavLink to="/allProducts" activeClassName="active">
+              <NavLink to="/allAdminShops" activeClassName="active">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm mr-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
                   Shops
                 </li>
@@ -102,7 +102,12 @@ export default function AdminHeader() {
                           />
                         </svg>
 
-                        <span className="ml-2">Logout</span>
+                        <span
+                          className="ml-2"
+                          onclick={localStorage.removeItem("token")}
+                        >
+                          Logout
+                        </span>
                       </div>
                     </li>
                   </Link>

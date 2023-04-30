@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ShopCard from "../../components/Cards/ShopCard";
+import ShopCard from "./ShopCard";
 import TitleCard from "../../components/Cards/TitleCard";
 import AdminHeader from "../../components/header/AdminHeader";
 
@@ -41,7 +41,6 @@ export default function AllProducts() {
       <AdminHeader />
       <TitleCard name={"Shops"} />
       <section class="text-gray-600 body-font my-10">
-
         <div class="flex items-center flex-wrap justify-center py-3">
           <a
             class="text-green-500 inline-flex items-center md:mb-2 lg:mb-0"
@@ -87,7 +86,6 @@ export default function AllProducts() {
           </div>
         </div>
       </section>
-
     </>
   );
 }

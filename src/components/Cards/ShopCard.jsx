@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function ShopCard({
@@ -10,12 +9,11 @@ export default function ShopCard({
   shopName,
   shopNo,
 }) {
-  const nav = useNavigate();
   const navigate = useNavigate();
 
   const handleclick = (id) => {
     localStorage.setItem("pid", id);
-    navigate("/products");
+    navigate("/customerProducts");
   };
 
   return (

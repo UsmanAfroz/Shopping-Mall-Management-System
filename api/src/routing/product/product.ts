@@ -8,10 +8,10 @@ const upload = multer({ storage: storage });
 
 const router = AsyncRouter();
 
-router.get('/getProduct', withAuth, getProducts)
+router.get('/getProduct', getProducts)
 router.post('/createProduct', withAuth, upload.array('pictures', 10), createProduct);
 router.put('/updateProduct', withAuth, upload.array('pictures', 10), updateProduct);
-router.get('/getProductByID/:id', withAuth, getProductByID)
+router.get('/getProductByID/:id', getProductByID)
 router.get('/getProductwithPk/:id', getProductwithPk)
 router.delete('/deleteProduct', withAuth, delProduct);
 router.get('/getUserProducts/:id', getUserProducts)

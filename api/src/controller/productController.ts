@@ -78,7 +78,7 @@ export const createProduct = async (req: Request, res: Response) => {
     }
 
     const productData: IProducts = req.body;
-    let images: Array<string> = []
+    const images: Array<string> = []
 
     if (Array.isArray(file)) {
         file.forEach(e => {

@@ -32,6 +32,10 @@ body {
   align-items: center;
 }
 
+.swiper-backface-hidden .swiper-slide{
+  height: 220px;
+}
+
 .swiper-slide img {
   display: block;
   width: 100%;
