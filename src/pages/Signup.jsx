@@ -102,19 +102,10 @@ export default function Signup() {
                     <input
                       type="radio"
                       name="usertype"
-                      value="ADMIN"
-                      checked={type === "ADMIN"}
-                      onChange={handleOptionChange}
-                    />{" "}
-                    ADMIN
-                  </section>
-                  <section>
-                    <input
-                      type="radio"
-                      name="usertype"
                       value="SHOPKEEPER"
                       checked={type === "SHOPKEEPER"}
                       onChange={handleOptionChange}
+                      className="cursor-pointer"
                     />{" "}
                     Shop Keeeper
                   </section>
@@ -126,6 +117,7 @@ export default function Signup() {
                       value="CUSTOMER"
                       checked={type === "CUSTOMER"}
                       onChange={handleOptionChange}
+                      className="cursor-pointer"
                     />{" "}
                     Customer
                   </section>

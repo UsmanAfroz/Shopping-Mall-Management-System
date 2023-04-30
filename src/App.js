@@ -2,9 +2,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddProduct from "./pages/admin/AddProduct";
 import AddShop from "./pages/admin/AddShop";
-import AllProducts from "./pages/admin/AllProducts";
+import AllAdminShops from "./pages/admin/AllAdminShops";
 import Dashboard from "./pages/admin/Floors";
-import Products from "./pages/admin/Products";
+import AdminProducts from "./pages/admin/Products";
 import Shops from "./pages/admin/Shops";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -15,6 +15,8 @@ import ProductDetail from "./pages/user/ProductDetail";
 import UserProduct from "./pages/user/products";
 import AllShops from "./pages/user/shops";
 import CustomerProducts from "./pages/user/customerProduct";
+import ShopKeeperShops from "./pages/shopKeeper/shops";
+import ShopKeeperProducts from "./pages/shopKeeper/shopKeeperProducts";
 
 function App() {
   return (
@@ -27,9 +29,14 @@ function App() {
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/addshop" element={<AddShop />} />
         <Route path="/allshops" element={<AllShops />} />
-        <Route path="/allAdminShops" element={<AllProducts />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/shopKeeperShops" element={<ShopKeeperShops />} />
+        <Route path="/allAdminShops" element={<AllAdminShops />} />
+        <Route path="/adminProducts/:id" element={<AdminProducts />} />
         <Route path="/customerProducts" element={<CustomerProducts />} />
+        <Route
+          path="/shopKeeperProducts/:id"
+          element={<ShopKeeperProducts />}
+        />
         <Route path="/" element={<Home />} />
         <Route path="userProducts/:id" element={<UserProduct />} />
         <Route path="/productDetail" element={<ProductDetail />} />

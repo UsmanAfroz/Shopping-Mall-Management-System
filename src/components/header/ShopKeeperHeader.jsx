@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-export default function AdminHeader() {
+export default function ShopKeeperHeader() {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
   return (
@@ -37,14 +37,9 @@ export default function AdminHeader() {
               </div>
             </div>
             <ul className="flex items-center justify-center h-full">
-              <NavLink to="/dashboard" activeClassName="active">
-                <li className="cursor-pointer h-full xl:flex items-center text-sm  tracking-normal hidden">
-                  Dashboard
-                </li>
-              </NavLink>
-              <NavLink to="/shops" activeClassName="active">
+              <NavLink to="/shopKeeperShops" activeClassName="active">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm ml-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
-                  Floors
+                  Shops
                 </li>
               </NavLink>
               <li className="mx-0 lg:mx-12 cursor-pointer">
@@ -67,14 +62,14 @@ export default function AdminHeader() {
                   </g>
                 </svg>
               </li>
-              <NavLink to="/allAdminShops" activeClassName="active">
+              <NavLink to="/allShopKeeperProducts" activeClassName="active">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm mr-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
-                  Shops
+                  Products
                 </li>
               </NavLink>
-              <NavLink to="#">
-                <li className="cursor-pointer h-full xl:flex items-center text-sm tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
-                  Products
+              <NavLink to="/allShopKeeperProducts" activeClassName="active">
+                <li className="cursor-pointer h-full xl:flex items-center text-sm mr-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
+                  Orders
                 </li>
               </NavLink>
             </ul>

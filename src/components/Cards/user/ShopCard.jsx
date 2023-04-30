@@ -14,10 +14,6 @@ export default function SliderCard({ id, image, name }) {
             navigate("/userProducts", { state: { id: id } });
           }}
         >
-          {/* <Link to={{
-                    pathname: '/userProducts',
-                    state: { id: id }
-                }}> */}
           <div className="flex flex-shrink-0 relative w-full sm:w-auto">
             <img
               src={image}

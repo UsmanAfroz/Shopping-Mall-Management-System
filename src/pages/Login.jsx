@@ -30,7 +30,7 @@ export default function Login() {
           }
 
           case "SHOPKEEPER": {
-            navigate("/dashboard");
+            navigate("/shopKeeperShops");
             break;
           }
           case "ADMIN": {
@@ -98,6 +98,7 @@ export default function Login() {
                       value="ADMIN"
                       checked={type === "ADMIN"}
                       onChange={handleOptionChange}
+                      className="cursor-pointer"
                     />{" "}
                     Admin
                   </section>
@@ -109,6 +110,7 @@ export default function Login() {
                       value="SHOPKEEPER"
                       checked={type === "SHOPKEEPER"}
                       onChange={handleOptionChange}
+                      className="cursor-pointer"
                     />{" "}
                     Shop Keeper
                   </section>
@@ -120,6 +122,7 @@ export default function Login() {
                       value="CUSTOMER"
                       checked={type === "CUSTOMER"}
                       onChange={handleOptionChange}
+                      className="cursor-pointer"
                     />{" "}
                     Customer
                   </section>
