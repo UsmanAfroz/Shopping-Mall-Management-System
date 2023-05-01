@@ -6,6 +6,7 @@ import TitleCard from "../../components/Cards/TitleCard";
 
 export default function AddShop() {
   const id = localStorage.getItem("Id");
+  const ownerId = localStorage.getItem("uid");
   const title = id === "id" ? "AddShop" : "Edit Info";
 
   const floor = localStorage.getItem("floorNo");
@@ -52,6 +53,7 @@ export default function AddShop() {
       floorNumber: floorNo,
       shopType: type,
       ownerPersonalInformation: {
+        OwnerId: ownerId,
         firstName: fname,
         lastName: lname,
         dob: dob,
@@ -64,14 +66,14 @@ export default function AddShop() {
       axios
         .put(`http://localhost:2000/api/shop/update/${id}`, jsn)
         .then((r) => {
-          navigate("/dashboard");
+          navigate("/shopKeeperShops");
         })
         .catch((er) => console.log("err", er));
     } else {
       axios
         .post(`http://localhost:2000/api/shop/create?token=${token}`, jsn)
         .then((res) => {
-          navigate("/dashboard");
+          navigate("/shopKeeperShops");
         })
         .catch((err) => console.log("error", err));
     }
@@ -81,7 +83,6 @@ export default function AddShop() {
     <>
       <AdminHeader />
       <TitleCard name={title} />
-
       <div className="flex flex-wrap justify-center">
         <div className="mx-10 bg-gray-300 p-6 rounded-xl  mt-5 md:mt-0">
           <h1 className="text-xl mb-4">Owner Details</h1>

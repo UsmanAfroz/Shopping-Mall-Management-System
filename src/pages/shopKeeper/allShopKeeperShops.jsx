@@ -9,6 +9,7 @@ export default function AllProducts() {
   const navigate = useNavigate();
   const [data, setList] = useState([]);
   let token = localStorage.getItem("token");
+  let shopManagerId = localStorage.getItem("uid");
 
   useEffect(() => {
     load();
@@ -19,7 +20,11 @@ export default function AllProducts() {
     axios
       .get(url)
       .then((res) => {
-        setList(res.data.data);
+        setList(
+          res.data.data.filter(
+            (e) => e?.ownerPersonalInformation?.OwnerId === shopManagerId
+          )
+        );
       })
       .catch((err) => console.log("err", err));
   };

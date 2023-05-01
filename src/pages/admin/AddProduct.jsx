@@ -68,7 +68,7 @@ export default function AddProduct() {
           },
         })
         .then((response) => {
-          navigate("/dashboard");
+          navigate("/ShopKeeperShops");
         })
         .catch((error) => {
           console.error(error);

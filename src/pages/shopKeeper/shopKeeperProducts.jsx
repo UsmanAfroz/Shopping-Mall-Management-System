@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import TitleCard from "../../components/Cards/TitleCard";
@@ -9,10 +9,12 @@ import AdminHeader from "../../components/header/AdminHeader";
 import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
 
 export default function ShopKeeperProducts() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const token = localStorage.getItem("token");
   let pid = localStorage.getItem("pid");
+  console.log("pid::::", id);
 
   useEffect(() => {
     loadData();
@@ -31,7 +33,7 @@ export default function ShopKeeperProducts() {
   const loadData = () => {
     axios
       .get(
-        `http://localhost:2000/api/product/getProductByID/${pid}?token=${token}`
+        `http://localhost:2000/api/product/getProductByID/${id}?token=${token}`
       )
       .then((res) => {
         setData(res.data.data);
@@ -44,6 +46,7 @@ export default function ShopKeeperProducts() {
     navigate("/addproduct");
   };
 
+  console.log("data", data);
   return (
     <>
       <ShopKeeperHeader />
