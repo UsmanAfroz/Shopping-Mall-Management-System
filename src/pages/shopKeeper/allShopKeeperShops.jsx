@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShopCard from "./ShopCard";
 import TitleCard from "../../components/Cards/TitleCard";
-import AdminHeader from "../../components/header/AdminHeader";
+import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
 
 export default function AllProducts() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <AdminHeader />
+      <ShopKeeperHeader />
       <TitleCard name={"Shops"} />
       <section class="text-gray-600 body-font my-10">
         <div class="flex items-center flex-wrap justify-center py-3">

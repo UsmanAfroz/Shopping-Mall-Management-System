@@ -5,10 +5,9 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import TitleCard from "../../components/Cards/user/TitleCard";
-import MainHeader from "../../components/header/MainHeader";
+import TitleCard from "../../components/Cards/TitleCard";
 import Footer from "../../sections/user/Footer";
 
 // Import Swiper styles
@@ -16,14 +15,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Autoplay, Navigation, Pagination } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import AdminHeader from "../../components/header/AdminHeader";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
-const UserProduct = () => {
+const AdminProduct = () => {
   const navigate = useNavigate();
   const [state, setState] = React.useState({
     open: false,
@@ -32,10 +28,9 @@ const UserProduct = () => {
   });
   const { vertical, horizontal, open } = state;
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const { id } = useParams();
 
   const [products, setProducts] = useState([]);
-  let url = `http://localhost:2000/api/product/getUserProducts/${id}`;
+  let url = `http://localhost:2000/api/product/getProduct`;
 
   useEffect(() => {
     axios
@@ -147,78 +142,6 @@ const UserProduct = () => {
             </Transition.Root>
 
             <main className="mx-auto max-w-2xl py-2 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-              <div className="h-52 -mt-14">
-                <Swiper
-                  spaceBetween={30}
-                  centeredSlides={true}
-                  autoplay={{
-                    delay: 2000,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  navigation={true}
-                  modules={[Autoplay, Pagination, Navigation]}
-                  className="mySwiper"
-                >
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/3244513/pexels-photo-3244513.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/8797307/pexels-photo-8797307.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/8100784/pexels-photo-8100784.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/3591557/pexels-photo-3591557.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/23547/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/345522/pexels-photo-345522.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/551622/pexels-photo-551622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img
-                      src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                      alt=""
-                    />
-                  </SwiperSlide>
-                </Swiper>
-              </div>
-
               <div className="pt-12 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
                 <aside>
                   <h2 className="sr-only">Filters</h2>
@@ -244,13 +167,7 @@ const UserProduct = () => {
                     <div class="container px-5 py-8 mx-auto">
                       <div class="flex flex-wrap -m-4">
                         {products.map((i) => (
-                          <div
-                            class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg"
-                            onClick={() => {
-                              localStorage.setItem("p_id", i._id);
-                              navigate("/productDetail");
-                            }}
-                          >
+                          <div class="h-fit m-3 w-2/6 transform overflow-hidden rounded-lg  bg-gray-800 dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
                             <Swiper
                               spaceBetween={30}
                               centeredSlides={true}
@@ -330,4 +247,4 @@ const UserProduct = () => {
   );
 };
 
-export default UserProduct;
+export default AdminProduct;

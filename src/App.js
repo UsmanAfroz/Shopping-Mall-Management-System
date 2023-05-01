@@ -15,8 +15,11 @@ import ProductDetail from "./pages/user/ProductDetail";
 import UserProduct from "./pages/user/products";
 import AllShops from "./pages/user/shops";
 import CustomerProducts from "./pages/user/customerProduct";
-import ShopKeeperShops from "./pages/shopKeeper/shops";
-import ShopKeeperProducts from "./pages/shopKeeper/shopKeeperProducts";
+import ShopKeeperShops from "./pages/shopkeeper/allShopKeeperShops";
+import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
+import AdminProduct from "./pages/admin/Products";
+
+
 
 function App() {
   return (
@@ -37,8 +40,9 @@ function App() {
           path="/shopKeeperProducts/:id"
           element={<ShopKeeperProducts />}
         />
+        <Route path="/adminProduct" element={<AdminProduct />} />
         <Route path="/" element={<Home />} />
-        <Route path="userProducts/:id" element={<UserProduct />} />
+        <Route path="/userProducts/:id" element={<UserProduct />} />
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/confirmorder" element={<ConfirmOrder />} />
