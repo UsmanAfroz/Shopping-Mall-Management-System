@@ -18,6 +18,7 @@ import CustomerProducts from "./pages/user/customerProduct";
 import ShopKeeperShops from "./pages/shopkeeper/allShopKeeperShops";
 import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
 import AdminProduct from "./pages/admin/Products";
+import AllOrders from "./pages/shopkeeper/orders";
 
 
 
@@ -40,6 +41,7 @@ function App() {
           path="/shopKeeperProducts/:id"
           element={<ShopKeeperProducts />}
         />
+        <Route path="/allShopKeeperOrders" element={<AllOrders />} />
         <Route path="/adminProduct" element={<AdminProduct />} />
         <Route path="/" element={<Home />} />
         <Route path="/userProducts/:id" element={<UserProduct />} />

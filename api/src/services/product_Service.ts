@@ -49,3 +49,9 @@ export const deleteProduct = async (id: any) => {
   const del = await Products.findByIdAndDelete({ _id: id });
   return del;
 };
+
+export const getShopKeeperProducts = async (id: string) => {
+  const shop = await Products.find({ 'pid': id })
+  if (!shop) return 'no Shop found ';
+  return shop;
+}

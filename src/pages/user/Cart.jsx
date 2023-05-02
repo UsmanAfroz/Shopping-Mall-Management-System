@@ -1,6 +1,4 @@
-import {
-  CheckIcon, XMarkIcon
-} from "@heroicons/react/20/solid";
+import { CheckIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
@@ -8,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
 import "./styles.css";
+import BasicModal from "../../components/Cards/Modal";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -15,6 +14,7 @@ const Cart = () => {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [slct, setSlct] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (slct) {
@@ -74,7 +74,12 @@ const Cart = () => {
   const add = () => {
     localStorage.setItem("obj", JSON.stringify(data));
     localStorage.setItem("ttl", total);
-    navigate("/confirmorder");
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setIsOpen(true);
+    } else {
+      navigate("/confirmorder");
+    }
   };
 
   return (
@@ -85,7 +90,7 @@ const Cart = () => {
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Shopping Cart
           </h1>
-          <form className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+          <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
             <section aria-labelledby="cart-heading" className="lg:col-span-7">
               <h2 id="cart-heading" className="sr-only">
                 Items in your shopping cart
@@ -192,40 +197,6 @@ const Cart = () => {
                 Order summary
               </h2>
 
-              {/* <dl className="mt-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <dt className="text-sm text-gray-600">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">${total - 10}</dd>
-                </div>
-           
-                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                  <dt className="flex text-sm text-gray-600">
-                    <span>Tax estimate</span>
-                    <a
-                      href="#"
-                      className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"
-                    >
-                      <span className="sr-only">
-                        Learn more about how tax is calculated
-                      </span>
-                      <QuestionMarkCircleIcon
-                        className="h-5 w-5"
-                        aria-hidden="true"
-                      />
-                    </a>
-                  </dt>
-                  <dd className="text-sm font-medium text-gray-900">$10.00</dd>
-                </div>
-                <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-                  <dt className="text-base font-medium text-gray-900">
-                    Order total
-                  </dt>
-                  <dd className="text-base font-medium text-gray-900">
-                    ${total}
-                  </dd>
-                </div>
-              </dl> */}
-
               {data.map((i) => (
                 <dl className="mt-6 space-y-4">
                   <div className="flex items-center justify-between">
@@ -255,10 +226,11 @@ const Cart = () => {
                 </button>
               </div>
             </section>
-          </form>
+          </div>
         </div>
       </div>
       <Footer />
+      {isOpen && <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} />}
     </>
   );
 };

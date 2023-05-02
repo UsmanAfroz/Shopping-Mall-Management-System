@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { product, deleteProduct, addProducts, update, getSingleProduct, getSingleProductId } from "../services/product_Service";
+import { product, deleteProduct, addProducts, update, getSingleProduct, getSingleProductId, getShopKeeperProducts } from "../services/product_Service";
 import { IProducts } from "../interfaces/products";
 import { uploadImage } from "../s3";
 import { Body } from "aws-sdk/clients/s3";
@@ -121,6 +121,18 @@ export const delProduct = async (req: Request, res: Response) => {
     try {
         await deleteProduct(id);
         return res.send({ message: "product deleted successfully", statsCode: 200 })
+    }
+    catch (err: any) {
+        return res.send({ statusCode: 500, message: err?.message })
+    }
+}
+
+export const getShopManagerProducts = async (req: Request, res: Response) => {
+    const id: string = req.params.id;
+    if (!id) return res.send({ message: "shopManagerID is required in parameters", statusCode: 500 })
+    try {
+        const shop = await getShopKeeperProducts(id);
+        return res.send({ statusCode: 200, data: shop })
     }
     catch (err: any) {
         return res.send({ statusCode: 500, message: err?.message })

@@ -62,12 +62,7 @@ export default function ShopKeeperHeader() {
                   </g>
                 </svg>
               </li>
-              <NavLink to="/allShopKeeperProducts" activeClassName="active">
-                <li className="cursor-pointer h-full xl:flex items-center text-sm mr-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
-                  Products
-                </li>
-              </NavLink>
-              <NavLink to="/allShopKeeperProducts" activeClassName="active">
+              <NavLink to="/allShopKeeperOrders" activeClassName="active">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm mr-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
                   Orders
                 </li>

@@ -1,6 +1,6 @@
 import { AsyncRouter } from "express-async-router";
 import { withAuth } from "../../middleware/withAuth";
-import { getProducts, createProduct, updateProduct, delProduct, getProductByID, getProductwithPk, getUserProducts ,editProduct} from '../../controller/productController';
+import { getProducts, createProduct, updateProduct, delProduct, getProductByID, getProductwithPk, getUserProducts, editProduct, getShopManagerProducts } from '../../controller/productController';
 import multer from 'multer';
 import { storage } from '../../middleware/imageuploader/imageuploader';
 
@@ -14,7 +14,8 @@ router.put('/updateProduct', withAuth, upload.array('pictures', 10), updateProdu
 router.get('/getProductByID/:id', getProductByID)
 router.get('/getProductwithPk/:id', getProductwithPk)
 router.delete('/deleteProduct', withAuth, delProduct);
-router.get('/getUserProducts/:id', getUserProducts)
-router.put('/editProduct/:id',upload.single('pictures'),editProduct)
+router.get('/getUserProducts/:id', getUserProducts);
+router.put('/editProduct/:id', upload.single('pictures'), editProduct);
+router.get('/getShopManagerProducts/:id', getShopManagerProducts)
 
 export default router;
