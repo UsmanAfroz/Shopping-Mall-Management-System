@@ -11,30 +11,7 @@ export default function AdminHeader() {
         <nav className="w-full mx-auto bg-white shadow xl:block hidden">
           <div className="container px-6 h-16 flex items-center lg:items-stretch justify-between mx-auto">
             <div className="w-auto flex items-center">
-              <div className="rounded-full relative p-3 flex justify-end text-gray-500 flex items-center relative">
-                <input
-                  type="text"
-                  className="bg-transparent focus:outline-none text-xs w-0 transition duration-150 ease-in-out absolute left-0 ml-10"
-                  placeholder="Type something..."
-                />
-                <svg
-                  onclick="searchHandler(this)"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="cursor-pointer icon icon-tabler icon-tabler-search"
-                  width={20}
-                  height={20}
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <circle cx={10} cy={10} r={7} />
-                  <line x1={21} y1={21} x2={15} y2={15} />
-                </svg>
-              </div>
+              <h2 className="text-gray-800 font-bold text-xl">Zelly</h2>
             </div>
             <ul className="flex items-center justify-center h-full">
               <NavLink to="/dashboard" activeClassName="active">

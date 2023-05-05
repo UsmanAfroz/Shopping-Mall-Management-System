@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import TitleCard from "../../components/Cards/TitleCard";
 import AdminHeader from "../../components/header/AdminHeader";
+import hello from "../../assets/images/floor.png";
+import Footer from "../../sections/user/Footer";
 
 export default function Dashboard() {
   const [usersDict, setUsersDict] = useState({});
@@ -42,7 +44,7 @@ export default function Dashboard() {
   return (
     <>
       <AdminHeader />
-      <TitleCard name={"Floors"} />
+      <TitleCard name={"Welcome"} />
       <>
         <div className="flex items-center w-full justify-center px-16 py-8">
           <div className="w-full rounded shadow bg-white dark:bg-gray-800 py-6 pl-6 pr-12">
@@ -57,7 +59,9 @@ export default function Dashboard() {
             <div className="md:flex items-center justify-between pt-8">
               <div className="flex items-center">
                 <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
-                  <svg
+                  
+                  <img style={{width: "90%", height:"30px"}} src= {hello} alt="floor image" />
+                  {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={25}
                     height={24}
@@ -68,7 +72,7 @@ export default function Dashboard() {
                       d="M24.9436 6V12C24.9436 12.6 24.5443 13 23.9452 13C23.3461 13 22.9468 12.6 22.9468 12V8.4L15.159 16.2C14.7596 16.6 14.1605 16.6 13.7612 16.2L9.46789 11.9L2.67854 18.7C2.47885 18.9 2.27917 19 1.97964 19C1.68011 19 1.48042 18.9 1.28073 18.7C0.881358 18.3 0.881358 17.7 1.28073 17.3L8.76899 9.8C9.16836 9.4 9.76742 9.4 10.1668 9.8L14.4601 14.1L21.549 7H17.9546C17.3555 7 16.9562 6.6 16.9562 6C16.9562 5.4 17.3555 5 17.9546 5H23.9452C24.045 5 24.2447 5 24.3446 5.1C24.5443 5.2 24.7439 5.4 24.8438 5.6C24.9436 5.7 24.9436 5.9 24.9436 6Z"
                       fill="#6D28D9"
                     />
-                  </svg>
+                  </svg> */}
                 </div>
                 <div className="pl-4">
                   <p className="w-11 text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
@@ -282,7 +286,7 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="bg-white md:px-8 xl:px-5 overflow-x-auto">
+          <div className="bg-white md:px-8 xl:px-5 overflow-x-auto mb-5">
             <table className="w-full whitespace-nowrap">
               <thead>
                 <tr className="h-20 w-full text-sm leading-none text-gray-600">
@@ -295,50 +299,6 @@ export default function Dashboard() {
               </thead>
 
               <tbody className="w-full">
-                {/* {
-                  Object.keys(usersDict).map((k) => (
-                    <>
-                      <tr
-
-                        className="h-20 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white "
-                      >
-                        <td className="pl-11" >
-                          <div className="flex items-center">
-
-                            {k}
-                          </div>
-                        </td>
-
-                        {
-                          usersDict[k].map((i) => (
-                            <>
-
-                              <tr>
-                                <td>
-                                  <p className="mr-16 pl-10">{i['shopNumber']}</p>
-                                </td>
-
-                                <td>
-                                  <p className="mr-16">x</p>
-                                </td>
-
-                                <td>
-                                  <div className="w-20 h-6 flex items-center mr-16 justify-center bg-blue-50 rounded-full">
-                                    <p className="text-xs leading-3 text-blue-500">
-                                      Approved
-                                    </p>
-                                  </div>
-                                </td>
-                              </tr>
-
-                            </>
-                          ))
-                        }
-                      </tr>
-                    </>
-                  ))
-                } */}
-
                 {tmp.map((i, index) => (
                   <>
                     <tr className="h-20 text-sm leading-none text-gray-700 border-b border-t border-gray-200 bg-white ">
@@ -364,6 +324,7 @@ export default function Dashboard() {
             </table>
           </div>
         </div>
+        <Footer />
       </>
     </>
   );
