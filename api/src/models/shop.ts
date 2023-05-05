@@ -8,6 +8,13 @@ const shopSchema = new Schema({
     floorNumber: { type: Number, required: true },
     shopType: { type: String, required: true },
     isArchive: { type: Boolean, default: false },
+    Status: {
+        type: String,
+        uppercase: true,
+        required: true,
+        enum: ['APPROVED', 'DISAPPROVED', 'PENDING'],
+        default: 'PENDING'
+    },
     ownerPersonalInformation: {
         OwnerId: String,
         firstName: String,

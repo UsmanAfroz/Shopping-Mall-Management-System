@@ -51,7 +51,7 @@ export default function AdminHeader() {
               </NavLink>
               <NavLink to="/adminProduct">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
-                  Products
+                  Statistics
                 </li>
               </NavLink>
             </ul>

@@ -20,8 +20,6 @@ import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
 import AdminProduct from "./pages/admin/Products";
 import AllOrders from "./pages/shopkeeper/orders";
 
-
-
 function App() {
   return (
     <>

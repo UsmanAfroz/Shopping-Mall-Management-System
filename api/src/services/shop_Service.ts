@@ -28,11 +28,22 @@ export const update = async (id: any, data: IShops) => {
                 'floorNumber': data.floorNumber,
                 'shopNumber': data.shopNumber,
                 'shopType': data.shopType,
+                'Status': data.Status,
                 'ownerPersonalInformation.cnic': data.ownerPersonalInformation.cnic,
                 'ownerPersonalInformation.firstName': data.ownerPersonalInformation.firstName,
                 'ownerPersonalInformation.lastName': data.ownerPersonalInformation.lastName,
                 'ownerPersonalInformation.dob': data.ownerPersonalInformation.dob,
                 'ownerPersonalInformation.Address': data.ownerPersonalInformation.Address
+            },
+        });
+    return updated;
+}
+
+export const updateShopStatus = async (id: any, data: IShops) => {
+    const updated = await Shop.findOneAndUpdate({ '_id': id },
+        {
+            $set: {
+                'Status': data.Status,
             },
         });
     return updated;

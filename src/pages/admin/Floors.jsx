@@ -59,8 +59,11 @@ export default function Dashboard() {
             <div className="md:flex items-center justify-between pt-8">
               <div className="flex items-center">
                 <div className="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full">
-                  
-                  <img style={{width: "90%", height:"30px"}} src= {hello} alt="floor image" />
+                  <img
+                    style={{ width: "90%", height: "30px" }}
+                    src={hello}
+                    alt="floor image"
+                  />
                   {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width={25}
@@ -293,8 +296,9 @@ export default function Dashboard() {
                   <th className="font-normal text-left pl-11">#</th>
                   <th className="font-normal text-left pl-11">Shop No</th>
                   <th className="font-normal text-left pl-10">Shop Name</th>
-                  <th className="font-normal text-left">Shop Type</th>
-                  <th className="font-normal text-left">Floor No</th>
+                  <th className="font-normal text-left pl-10">Shop Type</th>
+                  <th className="font-normal text-left pl-10">Floor No</th>
+                  <th className="font-normal text-left pl-10">Status</th>
                 </tr>
               </thead>
 
@@ -315,7 +319,10 @@ export default function Dashboard() {
                         <p className="mr-16 pl-10">{i["shopType"]}</p>
                       </td>
                       <td>
-                        <p className="mr-16 pl-10">{i["floorNumber"]}</p>
+                        <p className="mr-16 pl-12">{i["floorNumber"]}</p>
+                      </td>
+                      <td>
+                        <p className="mr-16 pl-8">{i["Status"]}</p>
                       </td>
                     </tr>
                   </>

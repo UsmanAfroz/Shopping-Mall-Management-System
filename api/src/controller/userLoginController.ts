@@ -4,13 +4,13 @@ import Jwt from "jsonwebtoken";
 import { userExists } from '../services/user_Service';
 
 export const Login = async (req: Request, res: Response) => {
-    const { email, password, userType } = req.body;
+    const { email, password } = req.body;
     try {
-        if (!email || !password || !userType) {
+        if (!email || !password) {
             res.status(400).send("All input is required");
         }
-        const user = await userExists({ email: email.toLowerCase(), userType });
-        if (user && (await bcrypt.compare(password, user?.password))) {
+        const user = await userExists({ email: email.toLowerCase() });
+        if (user && user?.password && (await bcrypt.compare(password, user?.password))) {
             const jwtSecret: string = process.env.JWT_SECRET!;
             const token = Jwt.sign(
                 { user_id: user._id, email },
@@ -30,7 +30,6 @@ export const Login = async (req: Request, res: Response) => {
             }
             res.status(200).json(data);
         }
-        //res.status(400).send("Invalid Credentials");
     } catch (err) {
         console.log(err);
     }

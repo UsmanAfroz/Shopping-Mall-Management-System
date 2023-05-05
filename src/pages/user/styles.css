@@ -32,7 +32,7 @@ body {
   align-items: center;
 }
 
-.swiper-backface-hidden .swiper-slide{
+.swiper-backface-hidden .swiper-slide {
   height: 220px;
 }
 
@@ -43,10 +43,14 @@ body {
   object-fit: cover;
   height: 220px;
 }
-.swipe-image{
-  height: 170px; 
+.swipe-image {
+  height: 170px;
 }
 
 .shopping-cart {
-  min-height: 659px
+  min-height: 659px;
+}
+
+.shopping-carts {
+  min-height: 409px;
 }

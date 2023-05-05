@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addShop, update, deleteShop, shops, getSingleShop, getUserShops } from "../services/shop_Service";
+import { addShop, update, deleteShop, shops, getSingleShop, getUserShops, updateShopStatus } from "../services/shop_Service";
 import { IShops } from "../interfaces/shop";
 
 export const getShops = async (req: Request, res: Response) => {
@@ -38,12 +38,28 @@ export const createShop = async (req: Request, res: Response) => {
 export const updateShop = async (req: Request, res: Response) => {
     const id: string = req.params.id;
     const data: IShops = req.body;
-    console.log('updateid', id)
     if (!id || !data) {
         return res.send({ message: "ID is required in parameters", statusCode: 500 })
     }
     try {
         await update(id, data);
+        return res.send({ message: "data updated successfully", statusCode: 200 })
+    }
+    catch (err: any) {
+        return res.send({ statusCode: 500, message: err?.message })
+    }
+}
+
+export const updateStatus = async (req: Request, res: Response) => {
+    const id: string = req.params.id;
+    const data = req.body;
+    console.log("req data ", data);
+
+    if (!id || !data) {
+        return res.send({ message: "ID is required in parameters", statusCode: 500 })
+    }
+    try {
+        await updateShopStatus(id, data);
         return res.send({ message: "data updated successfully", statusCode: 200 })
     }
     catch (err: any) {

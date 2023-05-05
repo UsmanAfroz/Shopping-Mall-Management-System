@@ -3,6 +3,7 @@ export interface IShops {
     shopNumber: number,
     floorNumber: number,
     shopType: string,
+    Status: string,
     ownerPersonalInformation: {
         firstName: string,
         lastName: string,
