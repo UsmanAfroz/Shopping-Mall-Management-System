@@ -19,6 +19,7 @@ import ShopKeeperShops from "./pages/shopkeeper/allShopKeeperShops";
 import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
 import AdminProduct from "./pages/admin/Products";
 import AllOrders from "./pages/shopkeeper/orders";
+import ChangePassword from "./pages/user/changePassword"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/shops" element={<Shops />} />
         <Route path="/addproduct" element={<AddProduct />} />
