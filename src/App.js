@@ -19,7 +19,8 @@ import ShopKeeperShops from "./pages/shopkeeper/allShopKeeperShops";
 import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
 import AdminProduct from "./pages/admin/Products";
 import AllOrders from "./pages/shopkeeper/orders";
-import ChangePassword from "./pages/user/changePassword"
+import ChangePassword from "./pages/user/changePassword";
+import FeedBacks from "./pages/admin/feedback";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/productDetail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/confirmorder" element={<ConfirmOrder />} />
+        <Route path="/feedbacks" element={<FeedBacks />} />
       </Routes>
     </>
   );

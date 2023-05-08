@@ -6,6 +6,7 @@ import productRoutes from './product/product';
 import cartRoutes from './cart/index';
 import archiveShopsRoutes from "./archiveShop/index";
 import archiveProductsRoutes from "./archiveProduct/index";
+import feebackRoutes from "./feedbacks/index";
 
 const router = AsyncRouter();
 
@@ -16,5 +17,7 @@ router.use('/product', productRoutes);
 router.use('/cart', cartRoutes);
 router.use('/archiveShop', archiveShopsRoutes);
 router.use('/archiveProduct', archiveProductsRoutes);
+router.use('/feeback', feebackRoutes)
+
 
 export default router;

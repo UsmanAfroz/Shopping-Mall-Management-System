@@ -54,3 +54,6 @@ body {
 .shopping-carts {
   min-height: 409px;
 }
+.pending {
+  min-height: 300px;
+}

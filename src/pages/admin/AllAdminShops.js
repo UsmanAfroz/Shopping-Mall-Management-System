@@ -9,6 +9,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Footer from "../../sections/user/Footer";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -129,8 +130,8 @@ export default function AllShops() {
                     load={load}
                   />
                 )) :
-                  <>
-                    No Shops Pending</>
+                  <div className="pending">
+                    No Shops Pending</div>
                 }
               </div>
             </div>
@@ -163,6 +164,7 @@ export default function AllShops() {
           </section>
         </TabPanel>
       </Box>
+      <Footer />
     </>
   );
 }

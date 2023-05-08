@@ -6,7 +6,6 @@ import TitleCard from "../../components/Cards/TitleCard";
 import MainHeader from "../../components/header/MainHeader";
 
 export default function AllShops() {
-  const navigate = useNavigate();
   const [data, setList] = useState([]);
   let token = localStorage.getItem("token");
 

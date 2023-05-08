@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BasicModal from "./Modal";
 
 export default function ShopCard({
   id,
@@ -10,10 +12,34 @@ export default function ShopCard({
   shopNo,
 }) {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const token = localStorage.getItem("token");
 
   const handleclick = (id) => {
     localStorage.setItem("pid", id);
     navigate("/customerProducts");
+  };
+  const feebackHandler = () => {
+    if (!token) {
+      setIsOpen(true);
+    } else {
+      setOpenModal(true);
+    }
+  };
+
+  const SubmitHandler = () => {
+    setOpenModal(false);
+    axios.post(
+      `http://localhost:2000/api/feeback/createFeedback?token=${token}`,
+      {
+        message: feedbackMessage,
+        username: name,
+        shopId: id,
+      }
+    );
+    console.log("feedbackMessage", feedbackMessage);
   };
 
   return (
@@ -24,6 +50,11 @@ export default function ShopCard({
             <div className="w-full h-16 bg-gray-300 rounded-t-xl px-8 py-5 border-gray-300 border">
               <div className="flex flex-row justify-between">
                 <h3 className="text-black font-semibold">{shopName}</h3>
+                <section className="flex flex-row">
+                  <div className="" onClick={feebackHandler}>
+                    <h4>Give Feedback</h4>
+                  </div>
+                </section>
               </div>
             </div>
             <div
@@ -63,6 +94,48 @@ export default function ShopCard({
           </div>
         </div>
       </div>
+      {isOpen && <BasicModal isOpen={isOpen} setIsOpen={setIsOpen} />}
+      {openModal && (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5  rounded-t">
+                  <h3 className="text-3xl font-semibold">FeedBack</h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setOpenModal(false)}
+                  ></button>
+                </div>
+                <textarea
+                  className="w-46  m-3 border-solid border-2 border-sky-500 "
+                  type="text"
+                  onChange={(e) => setFeedbackMessage(e.target.value)}
+                />
+                <div className="flex items-center justify-end p-6  rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setOpenModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={SubmitHandler}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      )}
     </>
   );
 }
