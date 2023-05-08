@@ -15,12 +15,14 @@ import ProductDetail from "./pages/user/ProductDetail";
 import UserProduct from "./pages/user/products";
 import AllShops from "./pages/user/shops";
 import CustomerProducts from "./pages/user/customerProduct";
-import ShopKeeperShops from "./pages/shopkeeper/allShopKeeperShops";
-import ShopKeeperProducts from "./pages/shopkeeper/shopKeeperProducts";
+import ShopKeeperShops from "./pages/shopKeeper/allShopKeeperShops";
+import ShopKeeperProducts from "./pages/shopKeeper/shopKeeperProducts";
 import AdminProduct from "./pages/admin/Products";
 import AllOrders from "./pages/shopkeeper/orders";
 import ChangePassword from "./pages/user/changePassword";
 import FeedBacks from "./pages/admin/feedback";
+import AllOrders from "./pages/shopKeeper/orders";
+import ChangePassword from "./pages/user/changePassword"
 
 function App() {
   return (
