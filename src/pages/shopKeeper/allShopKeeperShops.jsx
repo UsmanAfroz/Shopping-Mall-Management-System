@@ -5,7 +5,7 @@ import ShopCard from "./ShopCard";
 import TitleCard from "../../components/Cards/TitleCard";
 import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
 
-export default function AllProducts() {
+export default function ShopKeeperShops() {
   const navigate = useNavigate();
   const [data, setList] = useState([]);
   let token = localStorage.getItem("token");
