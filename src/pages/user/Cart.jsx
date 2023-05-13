@@ -78,7 +78,11 @@ const Cart = () => {
     if (!token) {
       setIsOpen(true);
     } else {
-      navigate("/confirmorder");
+      navigate("/confirmorder",{state:{
+        product: data,
+        Amount : total
+      }
+      });
     }
   };
 

@@ -1,6 +1,7 @@
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
 import axios from 'axios';
@@ -22,15 +23,17 @@ const paymentMethods = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ConfirmOrder = () => {
+const ConfirmOrder = (props) => {
+  const {state} = useLocation();
+  console.log(state);
   let token = localStorage.getItem("token");
-  const [quantity, setQuantity] = useState(1);
-  const [product, setProduct] = useState('');
+  const [quantity, setQuantity] = useState(state.product[0].count);
+  const [product, setProduct] = useState(state.product[0]._id);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [deliveryMethod, setDeliveryMethod] = useState('Credit Card');
   const [cvc, setCVC] = useState('');
-  const [amount, setAmount] = useState(7000);
+  const [amount, setAmount] = useState(state.Amount);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
