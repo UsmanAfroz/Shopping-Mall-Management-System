@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AdminHeader from "../../components/header/AdminHeader";
 import TitleCard from "../../components/Cards/TitleCard";
+import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
 
 export default function AddShop() {
   const id = localStorage.getItem("Id");
@@ -81,7 +82,7 @@ export default function AddShop() {
 
   return (
     <>
-      <AdminHeader />
+      <ShopKeeperHeader />
       <TitleCard name={title} />
       <div className="flex flex-wrap justify-center">
         <div className="mx-10 bg-gray-300 p-6 rounded-xl  mt-5 md:mt-0">
