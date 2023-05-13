@@ -3,8 +3,9 @@ import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
-
+import axios from 'axios';
 const deliveryMethods = [
+  
   {
     id: 1,
     title: "Standard",
@@ -22,16 +23,36 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const ConfirmOrder = () => {
-  const [cashOnDelivery, setcashOnDelivery] = useState(null);
+  let token = localStorage.getItem("token");
+  const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [deliveryMethod, setDeliveryMethod] = useState('Credit Card');
+  const [cvc, setCVC] = useState('');
+  const [amount, setAmount] = useState(7000);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
-
+    
   const ob = JSON.parse(localStorage.getItem("obj") || "[]");
   const ttl = localStorage.getItem("ttl");
   const uid = localStorage.getItem("uid");
 
-  const submit = () => {};
+  const onSubmit = () => {
+    console.log("In onSubmit")
+    axios.post('http://localhost:2000/api/cart/create',{
+      Headers:{
+        token: token,
+      },
+    },{
+      quantity,product,phoneNumber,postalCode,deliveryMethod,cvc,amount
+    }).then((res)=>{
+      console.log(res.body);
+    }).catch((e)=>{
+      console.log(e);
+    })
+  };
 
   return (
     <>
@@ -42,181 +63,14 @@ const ConfirmOrder = () => {
 
           <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             <div>
-              <div>
-                <h2 className="text-lg font-medium text-gray-900">
-                  Contact information
-                </h2>
-
-                <div className="mt-4">
-                  <label
-                    htmlFor="email-address"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="email"
-                      id="email-address"
-                      name="email-address"
-                      autoComplete="email"
-                      className="block w-full h-8 border-[1px] border-gray-300 rounded-md sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
+              
 
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">
                   Shipping information
                 </h2>
 
-                <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-                  <div>
-                    <label
-                      htmlFor="first-name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      First name
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="first-name"
-                        name="first-name"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Last name
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="last-name"
-                        name="last-name"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="company"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Company
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="company"
-                        id="company"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="address"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Address
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="address"
-                        id="address"
-                        autoComplete="street-address"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-2">
-                    <label
-                      htmlFor="apartment"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Apartment, suite, etc.
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="apartment"
-                        id="apartment"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      City
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="city"
-                        id="city"
-                        autoComplete="address-level2"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="country"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Country
-                    </label>
-                    <div className="mt-1">
-                      <select
-                        id="country"
-                        name="country"
-                        autoComplete="country-name"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      >
-                        <option>United States</option>
-                        <option>Canada</option>
-                        <option>Mexico</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="region"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      State / Province
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="region"
-                        id="region"
-                        autoComplete="address-level1"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
+                <div className="sm:col-span-2">
                   <div>
                     <label
                       htmlFor="postal-code"
@@ -231,6 +85,7 @@ const ConfirmOrder = () => {
                         id="postal-code"
                         autoComplete="postal-code"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
+                        onChange={(e)=>{setPostalCode(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -248,6 +103,7 @@ const ConfirmOrder = () => {
                         name="phone"
                         id="phone"
                         autoComplete="tel"
+                        onChange={(e)=>{setPhoneNumber(e.target.value)}}
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
@@ -402,6 +258,7 @@ const ConfirmOrder = () => {
                         name="card-number"
                         autoComplete="cc-number"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
+                        
                       />
                     </div>
                   </div>
@@ -456,6 +313,7 @@ const ConfirmOrder = () => {
                         id="cvc"
                         autoComplete="csc"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
+                        onChange={(e)=>{setCVC(e.target.value)}}
                       />
                     </div>
                   </div>
@@ -494,8 +352,7 @@ const ConfirmOrder = () => {
 
                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
-                    onClick={submit}
-                    type="submit"
+                    onClick={onSubmit}
                     className="w-full rounded-md cursor-pointer border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                   >
                     Confirm order
