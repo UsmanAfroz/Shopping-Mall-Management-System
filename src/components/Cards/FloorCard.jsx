@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { setConstantValue } from "typescript";
 
 export default function FloorCard({ shopNo, id }) {
   let navigate = useNavigate();

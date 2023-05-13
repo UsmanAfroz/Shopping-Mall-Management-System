@@ -9,6 +9,8 @@ export default function Dashboard() {
   const [ttlShops, setTtlShop] = useState();
   const [ttlFloors, setTtlFloors] = useState();
   const [tmp, setTmp] = useState([]);
+  const [selected , setSelected] = useState("Shop Name");
+  const [data,setData] = useState([])
 
   useEffect(() => {
     getLenths();
@@ -17,6 +19,7 @@ export default function Dashboard() {
   const getLenths = async () => {
     await axios.get(`http://localhost:2000/api/shop/getShops`).then((res) => {
       setTmp(res.data.data);
+      setData(res.data.data)
       const dict = res.data.data.reduce((acc, data) => {
         if (!acc[data["floorNumber"]]) {
           acc[data["floorNumber"]] = [data];
@@ -25,6 +28,7 @@ export default function Dashboard() {
         }
         return acc;
       }, {});
+     
 
       setUsersDict(dict);
 
@@ -34,12 +38,28 @@ export default function Dashboard() {
         .map((k, index) => {
           setTtlShop(usersDict[k].length * len);
         })
-        .catch((err) => {
-          console.log("Error:", err);
-        });
+       
     });
   };
+const filterHandler =(val)=>{
+  console.log("val", val, selected, tmp);
+  
+  console.log("selected", selected);
+  if(selected == "Shop Name"){
+    // setTmp(data);
+    setTmp(data.filter(e=>e.shopName.toLowerCase().includes(val.toLowerCase())))
+  }
+ else if(selected === "Shop Number"){
+  // setTmp(data);
+    setTmp(data.filter(e=>e.shopNumber.toString().includes(val)))
+  }
+  else {
+    // setTmp(data);
+    setTmp(data.filter(e=>e.floorNumber.toString().includes(val)))
+  }
+}
 
+  console.log("selected", selected, tmp);
   return (
     <>
       <AdminHeader />
@@ -127,7 +147,7 @@ export default function Dashboard() {
                 </div>
                 <div className="pl-4">
                   <p className="w-11 text-lg font-semibold leading-none text-gray-800 dark:text-gray-100">
-                    1.423k
+                    3
                   </p>
                   <p className="w-8 text-xs leading-3 text-gray-500 pt-2 dark:text-gray-400">
                     Products
@@ -262,25 +282,18 @@ export default function Dashboard() {
                       type="text"
                       className="py-2.5 pl-1 w-full focus:outline-none text-sm rounded text-gray-600 placeholder-gray-500"
                       placeholder="Search"
+                      onChange={(e)=>filterHandler(e.target.value)}
                     />
                   </div>
                 </div>
                 <div className="flex items-center mt-4 md:mt-0 md:ml-3 lg:ml-0">
                   <div className="w-40 py-2 px-3 bg-white lg:ml-3 border rounded border-gray-200">
-                    <select className="w-full text-sm leading-3 text-gray-500 focus:outline-none">
-                      <option>Employees</option>
-                      <option>Clients</option>
-                      <option>Employees</option>
+                    <select className="w-full text-sm leading-3 text-gray-500 focus:outline-none" value={selected} onChange={(e)=>setSelected(e.target.value)}>
+                      <option value="Shop Name">Shop Name</option>
+                      <option value="Shop Number">Shop Number</option>
+                      <option value="Floor Number">Floor Number</option>
                     </select>
                   </div>
-                  <button
-                    onclick="popuphandler(true)"
-                    className="inline-flex ml-1.5 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
-                  >
-                    <p className="text-sm font-medium leading-none text-white">
-                      Add User
-                    </p>
-                  </button>
                 </div>
               </div>
             </div>

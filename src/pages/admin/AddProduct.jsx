@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "../../components/header/AdminHeader";
 import TitleCard from "../../components/Cards/TitleCard";
+import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
 
 export default function AddProduct() {
   let id = localStorage.getItem("Id");
@@ -91,9 +91,8 @@ export default function AddProduct() {
 
   return (
     <>
-      <AdminHeader />
+      <ShopKeeperHeader />
       <TitleCard name={Title} />
-
       <div className="flex flex-wrap justify-center">
         <div className="mx-10 bg-gray-300 p-6 rounded-xl  mt-5 md:mt-0">
           <div className="flex flex-col mb-2">
