@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+// import Avatar from '@mui/joy/Avatar';
+import { Avatar } from "@mui/material";
 
 export default function AdminHeader() {
   const [show, setShow] = useState(null);
@@ -143,12 +145,8 @@ export default function AdminHeader() {
                   </Link>
                 </ul>
               )}
-              <div className="rounded">
-                <img
-                  className="rounded h-10 w-10 object-cover"
-                  src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png"
-                  alt="logo"
-                />
+              <div className="rounded text-5xl">
+                <Avatar />
               </div>
               <div className="text-gray-600 ml-2">
                 <svg

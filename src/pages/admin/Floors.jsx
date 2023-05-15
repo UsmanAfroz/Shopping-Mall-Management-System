@@ -46,20 +46,18 @@ const filterHandler =(val)=>{
   
   console.log("selected", selected);
   if(selected == "Shop Name"){
-    // setTmp(data);
     setTmp(data.filter(e=>e.shopName.toLowerCase().includes(val.toLowerCase())))
   }
  else if(selected === "Shop Number"){
-  // setTmp(data);
     setTmp(data.filter(e=>e.shopNumber.toString().includes(val)))
   }
+ else if(selected === "Status"){
+    setTmp(data.filter(e=>e.Status.toLowerCase().includes(val.toLowerCase())))
+  }
   else {
-    // setTmp(data);
     setTmp(data.filter(e=>e.floorNumber.toString().includes(val)))
   }
 }
-
-  console.log("selected", selected, tmp);
   return (
     <>
       <AdminHeader />
@@ -292,6 +290,7 @@ const filterHandler =(val)=>{
                       <option value="Shop Name">Shop Name</option>
                       <option value="Shop Number">Shop Number</option>
                       <option value="Floor Number">Floor Number</option>
+                      <option value="Status">Status</option>
                     </select>
                   </div>
                 </div>

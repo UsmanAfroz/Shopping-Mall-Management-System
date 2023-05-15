@@ -21,6 +21,8 @@ import AdminProduct from "./pages/admin/Products";
 import AllOrders from "./pages/shopKeeper/orders"
 import ChangePassword from "./pages/user/changePassword";
 import FeedBacks from "./pages/admin/feedback";
+import AdminFloors from "./pages/user/adminfloor";
+import AddFloor from "./pages/admin/AddFloor";
 
 function App() {
   return (
@@ -30,9 +32,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/changePassword" element={<ChangePassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/shops" element={<Shops />} />
+        <Route path="/shops" element={<AdminFloors />} />
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/addshop" element={<AddShop />} />
+        <Route path="/addfloor" element={<AddFloor />} />
         <Route path="/allshops" element={<AllShops />} />
         <Route path="/shopKeeperShops" element={<ShopKeeperShops />} />
         <Route path="/allAdminShops" element={<AllAdminShops />} />
