@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import Avatar from '@mui/joy/Avatar';
+import axios from "axios";
 import { Avatar } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 export default function AdminHeader() {
   const [show, setShow] = useState(null);
   const [profile, setProfile] = useState(false);
+  const [data, setList] = useState([]);
+  let token = localStorage.getItem("token");
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const load = () => {
+    let url = `http://localhost:2000/api/shop/getShops?token=${token}`;
+    axios
+      .get(url)
+      .then((res) => {
+        setList(res.data.data);
+      })
+      .catch((err) => console.log("err", err));
+  };
   return (
     <>
       <div className="bg-gray-200 h-full w-full">
@@ -21,7 +38,7 @@ export default function AdminHeader() {
                   Dashboard
                 </li>
               </NavLink>
-              <NavLink to="/shops" activeClassName="active">
+              <NavLink to="/floors" activeClassName="active">
                 <li className="cursor-pointer h-full xl:flex items-center text-sm ml-10 tracking-normal hidden hover:text-indigo-700 transition duration-150 ease-in-out">
                   Floors
                 </li>
@@ -62,8 +79,20 @@ export default function AdminHeader() {
               onClick={() => setProfile(!profile)}
             >
               {profile && (
-                <ul className="p-2 w-44 border-r bg-white absolute rounded xl:right-0 left-0 xl:left-auto shadow mt-16 top-0 ">
-                  <Link to="/changePassword">
+                <ul className="p-2 w-48 border-r bg-white absolute rounded xl:right-0 left-0 xl:left-auto shadow mt-16 top-0 ">
+                  <Link to="/allAdminShops">
+                    <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                      <div className="flex items-center">
+                        <NotificationsNoneIcon />
+                        <span
+                          className="ml-2"
+                          onclick={localStorage.removeItem("token")}
+                        >
+                          Pending Requests (
+                          {data.filter((e) => e.Status === "PENDING").length})
+                        </span>
+                      </div>
+                    </li>
                     <li className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
                       <div className="flex items-center">
                         <svg
