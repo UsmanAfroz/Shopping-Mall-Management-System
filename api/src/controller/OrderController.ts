@@ -22,3 +22,8 @@ export const CreateOrder = async (req:any,res:any)=>{
         res.status(500).send(e);
     }
 }
+
+export const GetOrders = async(req:any, res:any)=>{
+    const Orders = await Order.find();
+    res.status(200).send(Orders);
+}
