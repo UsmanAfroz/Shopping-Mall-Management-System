@@ -12,6 +12,7 @@ const orderSchema = new Schema({
     DeliveryMethod:String,
     CVC : String,
     Amount: String,
+    uid:String
 });
 
-export const Order = mongoose.model("order", orderSchema);
+export const Order = mongoose.model("order", orderSchema);  

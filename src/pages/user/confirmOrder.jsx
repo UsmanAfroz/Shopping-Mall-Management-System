@@ -4,9 +4,8 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
-import axios from 'axios';
+import axios from "axios";
 const deliveryMethods = [
-  
   {
     id: 1,
     title: "Standard",
@@ -24,34 +23,43 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const ConfirmOrder = (props) => {
-  const {state} = useLocation();
+  const { state } = useLocation();
   console.log(state.product[0].count);
   let token = localStorage.getItem("token");
   const [quantity, setQuantity] = useState(state.product[0].count);
   const [product, setProduct] = useState(state.product[0]._id);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [deliveryMethod, setDeliveryMethod] = useState('Credit Card');
-  const [cvc, setCVC] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [deliveryMethod, setDeliveryMethod] = useState("Credit Card");
+  const [cvc, setCVC] = useState("");
   const [amount, setAmount] = useState(state.Amount);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
-    
+
   const ob = JSON.parse(localStorage.getItem("obj") || "[]");
   const ttl = localStorage.getItem("ttl");
   const uid = localStorage.getItem("uid");
-console.log(token)
+  console.log(token);
   const onSubmit = () => {
-    console.log("In onSubmit")
-    axios.post(`http://localhost:2000/api/order/createOrder?token=${token}`,{
-      quantity,product:state.product[0],phoneNumber,postalCode,deliveryMethod,cvc,amount
-    }).then((res)=>{
-      
-      console.log(res.body);
-    }).catch((e)=>{
-      console.log(e);
-    })
+    console.log("In onSubmit");
+    axios
+      .post(`http://localhost:2000/api/order/createOrder?token=${token}`, {
+        quantity,
+        product: state.product[0],
+        phoneNumber,
+        postalCode,
+        deliveryMethod,
+        cvc,
+        amount,
+        uid
+      })
+      .then((res) => {
+        console.log(res.body);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -63,8 +71,6 @@ console.log(token)
 
           <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
             <div>
-              
-
               <div className="mt-10 border-t border-gray-200 pt-10">
                 <h2 className="text-lg font-medium text-gray-900">
                   Shipping information
@@ -85,7 +91,9 @@ console.log(token)
                         id="postal-code"
                         autoComplete="postal-code"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                        onChange={(e)=>{setPostalCode(e.target.value)}}
+                        onChange={(e) => {
+                          setPostalCode(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
@@ -103,7 +111,9 @@ console.log(token)
                         name="phone"
                         id="phone"
                         autoComplete="tel"
-                        onChange={(e)=>{setPhoneNumber(e.target.value)}}
+                        onChange={(e) => {
+                          setPhoneNumber(e.target.value);
+                        }}
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
                       />
                     </div>
@@ -258,7 +268,6 @@ console.log(token)
                         name="card-number"
                         autoComplete="cc-number"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                        
                       />
                     </div>
                   </div>
@@ -313,7 +322,9 @@ console.log(token)
                         id="cvc"
                         autoComplete="csc"
                         className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                        onChange={(e)=>{setCVC(e.target.value)}}
+                        onChange={(e) => {
+                          setCVC(e.target.value);
+                        }}
                       />
                     </div>
                   </div>
@@ -349,19 +360,17 @@ console.log(token)
                     </dd>
                   </div>
                 </dl>
-
-                
               </div>
             </div>
           </form>
           <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                  <button
-                    onClick={onSubmit}
-                    className="w-full rounded-md cursor-pointer border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                  >
-                    Confirm order
-                  </button>
-                </div>
+            <button
+              onClick={onSubmit}
+              className="w-full rounded-md cursor-pointer border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            >
+              Confirm order
+            </button>
+          </div>
         </div>
       </div>
       <Footer />
