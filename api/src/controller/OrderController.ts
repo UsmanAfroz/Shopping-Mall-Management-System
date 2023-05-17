@@ -23,7 +23,40 @@ export const CreateOrder = async (req:any,res:any)=>{
     }
 }
 
-export const GetOrders = async(req:any, res:any)=>{
-    const Orders = await Order.find();
+export const GetOrders = async(req:Request, res:Response)=>{
+    try{
+        const Orders = await Order.find();
     res.status(200).send(Orders);
+    }
+    catch(e){
+        res.status(500).send("Internal Server Error")
+    }
+}
+
+export const deleteOrder = async(req:Request,res:Response)=>{
+    if(!req.params.id){
+        res.status(400).send("Please provide an id")
+    }
+    try{
+        await Order.findByIdAndDelete(req.params.id)
+    res.status(200).send("Order deleted successfully")
+    }
+    catch(e){
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+export const updateOrders = async(req:Request, res:Response){
+    if(!req.params.id){
+        res.status(400).send("Please provide an id")
+    }
+    try{
+        await Order.findByIdAndUpdate({id:req.params.id},req.body,{
+            new:true,
+        })
+    res.status(200).send("Order updated successfully")
+    }
+    catch(e){
+        res.status(500).send("Internal Server Error");
+    }
 }
