@@ -25,7 +25,7 @@ function classNames(...classes) {
 }
 const ConfirmOrder = (props) => {
   const {state} = useLocation();
-  console.log(state);
+  console.log(state.product[0].count);
   let token = localStorage.getItem("token");
   const [quantity, setQuantity] = useState(state.product[0].count);
   const [product, setProduct] = useState(state.product[0]._id);
@@ -41,16 +41,13 @@ const ConfirmOrder = (props) => {
   const ob = JSON.parse(localStorage.getItem("obj") || "[]");
   const ttl = localStorage.getItem("ttl");
   const uid = localStorage.getItem("uid");
-
+console.log(token)
   const onSubmit = () => {
     console.log("In onSubmit")
-    axios.post('http://localhost:2000/api/cart/create',{
-      Headers:{
-        token: token,
-      },
-    },{
-      quantity,product,phoneNumber,postalCode,deliveryMethod,cvc,amount
+    axios.post(`http://localhost:2000/api/order/createOrder?token=${token}`,{
+      quantity,product:state.product[0],phoneNumber,postalCode,deliveryMethod,cvc,amount
     }).then((res)=>{
+      
       console.log(res.body);
     }).catch((e)=>{
       console.log(e);
@@ -353,7 +350,11 @@ const ConfirmOrder = (props) => {
                   </div>
                 </dl>
 
-                <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
+                
+              </div>
+            </div>
+          </form>
+          <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                   <button
                     onClick={onSubmit}
                     className="w-full rounded-md cursor-pointer border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
@@ -361,9 +362,6 @@ const ConfirmOrder = (props) => {
                     Confirm order
                   </button>
                 </div>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
       <Footer />

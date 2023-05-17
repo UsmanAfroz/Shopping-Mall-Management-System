@@ -1,12 +1,17 @@
 import { Request,Response } from "express";
 import { Order } from "../models/order";
-export const CreateOrder = async (req:Request,res:Response)=>{
+import { User } from "../models/user";
+export const CreateOrder = async (req:any,res:any)=>{
+    
+    const user = await User.findById(req.user.user_id);
+    console.log(req.body);
+   // console.log(user);
     try{
-    const NewOrder = await Order.create({
+    await Order.create({
         ...req.body,
-       FirstName: req.user.personalInformation.firstName,
-       LastName: req.user.personalInformation.LastName,
-       Address: req.user.personalInformation.Address, 
+       FirstName: user?.personalInformation?.firstName,
+       LastName: user?.personalInformation?.lastName,
+       Address: user?.personalInformation?.Address, 
     });
     res.status(200).send({
         message:"Order created Successfully"
