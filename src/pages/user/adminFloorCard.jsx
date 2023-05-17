@@ -1,0 +1,95 @@
+import "pure-react-carousel/dist/react-carousel.es.css";
+
+import { Link } from "react-router-dom";
+
+import "pure-react-carousel/dist/react-carousel.es.css";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+// import "./style.css";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// import required modules
+import { Pagination } from "swiper";
+import { Button } from "@mui/material";
+
+export default function AdminFloorCards({ number, list, len }) {
+  return (
+    <>
+      <div className=" mx-auto">
+        <div className="flex flex-wrap justify-center items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z"
+            />
+          </svg>
+          <b>
+            <h1 className="text-2xl"> Floor {number}</h1>
+          </b>
+        </div>
+
+        <div className=" flex items-center justify-center w-full h-full sm:py-8 px-4">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={10}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 50,
+              },
+            }}
+            modules={[Pagination]}
+            className="mySwiper"
+          >
+            {list.map((i) => (
+              <SwiperSlide>
+                <Link id={i["_id"]} className="max-w-xs">
+                  <div className="bg-gray-100 shadow rounded-tl rounded-tr">
+                    <img
+                      src="https://image.cnbcfm.com/api/v1/image/107036059-1648140541349-gettyimages-1239350024-PWeaver-Target-01.jpeg?v=1654544436&w=1920&h=1080"
+                      alt="bg-img"
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="bg-white shadow  px-5 rounded-b">
+                    <p className="w-48 text-base font-semibold leading-5 pt-4 text-black">
+                      {i["shopName"]}
+                    </p>
+
+                    <p className="py-2 text-xs leading-4 dark:text-gray-400 text-gray-500">
+                      When I first got into the advertising business, I was
+                      looking for the magical combination
+                    </p>
+                    <Button> Delete</Button>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>{" "}
+    </>
+  );
+}

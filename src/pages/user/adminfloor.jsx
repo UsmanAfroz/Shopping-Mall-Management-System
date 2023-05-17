@@ -1,13 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import Features from '../../sections/user/Features';
-import Floors from '../../sections/user/Floors';
-import Hero from '../../sections/user/Hero';
-import Footer from '../../sections/user/Footer';
-import MainHeader from '../../components/header/MainHeader';
-import axios from 'axios';
-import AdminHeader from '../../components/header/AdminHeader';
-import TitleCard from '../../components/Cards/TitleCard';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Features from "../../sections/user/Features";
+import Floors from "../../sections/user/Floors";
+import Hero from "../../sections/user/Hero";
+import Footer from "../../sections/user/Footer";
+import MainHeader from "../../components/header/MainHeader";
+import axios from "axios";
+import AdminHeader from "../../components/header/AdminHeader";
+import TitleCard from "../../components/Cards/TitleCard";
+import AdminFloorCards from "./adminFloorCard";
 
 export default function AdminFloors() {
   const [usersDict, setUsersDict] = useState({});
@@ -18,21 +19,21 @@ export default function AdminFloors() {
   useEffect(() => {
     axios
       .get(`http://localhost:2000/api/shop/getShops`)
-      .then(res => {
+      .then((res) => {
         setLen(res.data.data.length);
         const dict = res.data.data.reduce((acc, data) => {
-          if (!acc[data['floorNumber']]) {
-            acc[data['floorNumber']] = [data];
+          if (!acc[data["floorNumber"]]) {
+            acc[data["floorNumber"]] = [data];
           } else {
-            acc[data['floorNumber']].push(data);
+            acc[data["floorNumber"]].push(data);
           }
           return acc;
         }, {});
 
         setUsersDict(dict);
       })
-      .catch(err => {
-        console.log('Error:', err);
+      .catch((err) => {
+        console.log("Error:", err);
       });
   }, []);
 
@@ -44,14 +45,15 @@ export default function AdminFloors() {
   return (
     <>
       <AdminHeader />
-      <TitleCard name={'Floors'} />
+      <TitleCard name={"Floors"} />
       <div class="flex items-center flex-wrap justify-center py-3">
         <a
           class="text-green-500 inline-flex items-center md:mb-2 lg:mb-0"
           href=" "
           onClick={() => {
             navigate("/addfloor");
-          }}>
+          }}
+        >
           Add floor
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +61,8 @@ export default function AdminFloors() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6 text-green-500">
+            className="w-6 h-6 text-green-500"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -68,9 +71,9 @@ export default function AdminFloors() {
           </svg>
         </a>
       </div>
-      {floors.map(k => (
+      {floors.map((k) => (
         <>
-          <Floors number={k} list={usersDict[k]} len={len} />
+          <AdminFloorCards number={k} list={usersDict[k]} len={len} />
         </>
       ))}
 
@@ -82,7 +85,8 @@ export default function AdminFloors() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6">
+            className="w-6 h-6"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
