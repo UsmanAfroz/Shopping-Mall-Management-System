@@ -6,7 +6,6 @@ export interface ITemp {
     status: string,
     category: any
     brandName: string,
-    deliveryTime: string,
     description: string,
     images: string,
     uid:string,

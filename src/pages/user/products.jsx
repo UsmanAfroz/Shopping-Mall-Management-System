@@ -46,6 +46,8 @@ const UserProduct = () => {
       .catch((err) => console.log("Err", err));
   }, []);
 
+  console.log("products", products);
+
   const addCart = (obj) => {
     let token = localStorage.getItem("token");
     let uid = localStorage.getItem("uid");
@@ -64,7 +66,6 @@ const UserProduct = () => {
           Price: obj["Price"],
           sizes: obj["sizes"],
           status: obj["status"],
-          deliveryTime: obj["deliveryTime"],
           description: obj["description"],
           available: obj["available"],
           pid: obj["pid"],
@@ -164,7 +165,7 @@ const UserProduct = () => {
                 >
                   <SwiperSlide>
                     <img
-                      src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fshopping-mall-products%3Fimage_type%3Dphoto&psig=AOvVaw062jrjClIs3BmyW6Sn0p00&ust=1684565969685000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCLCD5rLngP8CFQAAAAAdAAAAABAE"
                       alt=""
                     />
                   </SwiperSlide>

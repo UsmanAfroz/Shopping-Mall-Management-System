@@ -37,6 +37,8 @@ export default function Home() {
     setCount(count + count);
   };
 
+  console.log("floors",floors);
+
   return (
     <>
       <MainHeader />

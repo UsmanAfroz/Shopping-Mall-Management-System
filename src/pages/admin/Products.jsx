@@ -59,7 +59,6 @@ const AdminProduct = () => {
           Price: obj["Price"],
           sizes: obj["sizes"],
           status: obj["status"],
-          deliveryTime: obj["deliveryTime"],
           description: obj["description"],
           available: obj["available"],
           pid: obj["pid"],

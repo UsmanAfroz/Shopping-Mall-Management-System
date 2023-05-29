@@ -5,7 +5,6 @@ export interface IProducts {
     status: boolean,
     category: any
     brandName: string,
-    deliveryTime: string,
     description: string,
     images: any,
 }

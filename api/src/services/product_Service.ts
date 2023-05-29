@@ -32,7 +32,6 @@ export const update = async (id: any, data: IProducts) => {
         Price: data.Price,
         brandName: data.brandName,
         category: data.category,
-        deliveryTime: data.deliveryTime,
         description: data.description,
         sizes: data.sizes,
         status: data.status,

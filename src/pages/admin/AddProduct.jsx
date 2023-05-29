@@ -39,7 +39,6 @@ export default function AddProduct() {
           setStatus(res.data.data["status"]);
           setCategory(res.data.data["category"]);
           setBrand(res.data.data["brandName"]);
-          setDeliver(res.data.data["deliveryTime"]);
           setDescription(res.data.data["description"]);
         })
         .catch((err) => console.log("err", err));
@@ -56,7 +55,6 @@ export default function AddProduct() {
     formData.append("status", status);
     formData.append("category", category);
     formData.append("brandName", brand);
-    formData.append("deliveryTime", time);
     formData.append("description", description);
     formData.append("pid", pid);
 

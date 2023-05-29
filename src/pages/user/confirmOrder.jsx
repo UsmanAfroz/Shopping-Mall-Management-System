@@ -1,10 +1,14 @@
 import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MainHeader from "../../components/header/MainHeader";
 import Footer from "../../sections/user/Footer";
 import axios from "axios";
+import { ethers } from 'ethers';
+import detectEthereumProvider from '@metamask/detect-provider';
+
+import { useNavigate } from "react-router-dom";
 const deliveryMethods = [
   {
     id: 1,
@@ -14,54 +18,66 @@ const deliveryMethods = [
   },
   { id: 2, title: "Express", turnaround: "2–5 business days", price: "$16.00" },
 ];
-const paymentMethods = [
-  { id: "cashonDelivery", title: "Cash on Delivery" },
-  { id: "credit-card", title: "Credit card" },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const ConfirmOrder = (props) => {
+  const navigate = useNavigate();
   const { state } = useLocation();
   console.log(state.product[0].count);
   let token = localStorage.getItem("token");
-  const [quantity, setQuantity] = useState(state.product[0].count);
-  const [product, setProduct] = useState(state.product[0]._id);
+
+    const paymentAmount = "0.1"; 
+  const [provider, setProvider] = useState(null);
+  const [signer, setSigner] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [postalCode, setPostalCode] = useState("");
-  const [deliveryMethod, setDeliveryMethod] = useState("Credit Card");
-  const [cvc, setCVC] = useState("");
-  const [amount, setAmount] = useState(state.Amount);
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(
     deliveryMethods[0]
   );
 
-  const ob = JSON.parse(localStorage.getItem("obj") || "[]");
   const ttl = localStorage.getItem("ttl");
-  const uid = localStorage.getItem("uid");
   console.log(token);
-  const onSubmit = () => {
-    console.log("In onSubmit");
-    axios
-      .post(`http://localhost:2000/api/order/createOrder?token=${token}`, {
-        quantity,
-        product: state.product[0],
-        phoneNumber,
-        postalCode,
-        deliveryMethod,
-        cvc,
-        amount,
-        uid
-      })
-      .then((res) => {
-        console.log(res.body);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
 
+  useEffect(() => {
+    const initializeProvider = async () => {
+      const detectedProvider = await detectEthereumProvider();
+      if (detectedProvider) {
+        setProvider(new ethers.providers.Web3Provider(detectedProvider));
+      }
+    };
+
+    initializeProvider();
+  }, []);
+
+  const handlePaymentSubmit = async (e) => {
+    e.preventDefault();
+
+    if (provider) {
+      try {
+        await provider.send('eth_requestAccounts', []);
+        const accounts = await provider.listAccounts();
+        const signer = provider.getSigner(accounts[0]);
+        setSigner(signer);
+
+        const transactionResponse = await signer.sendTransaction({
+          to: '0x758ac563d89dDe2078CfD77FFf832E21B989217e',
+          value: ethers.utils.parseEther(paymentAmount),
+        });
+
+        await transactionResponse.wait();
+        
+
+        console.log('Payment transaction successful:', transactionResponse);
+        navigate('/')
+      } catch (error) {
+        console.error('Payment transaction error:', error);
+      }
+    } else {
+      console.error('MetaMask provider not available');
+    }
+  };
   return (
     <>
       <MainHeader />
@@ -191,145 +207,6 @@ const ConfirmOrder = (props) => {
                 </RadioGroup>
               </div>
 
-              {/* Payment */}
-              <div className="mt-10 border-t border-gray-200 pt-10">
-                <h2 className="text-lg font-medium text-gray-900">Payment</h2>
-
-                <fieldset className="mt-4">
-                  <legend className="sr-only">Payment type</legend>
-                  <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-                    <div class="flex">
-                      <div class="mr-4">
-                        <label class="inline-flex items-center">
-                          <input
-                            type="radio"
-                            class="form-radio"
-                            name="radio-option"
-                            value="option1"
-                          />
-                          <span class="ml-2">Cash on delivery</span>
-                        </label>
-                      </div>
-                      <div>
-                        <label class="inline-flex items-center">
-                          <input
-                            type="radio"
-                            class="form-radio"
-                            name="radio-option"
-                            value="option2"
-                          />
-                          <span class="ml-2">Credit card</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    {/* {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                      <div key={paymentMethod.id} className="flex items-center">
-                        {paymentMethodIdx === 0 ? (
-                          <input
-                            id={paymentMethod.id}
-                            name="payment-type"
-                            type="radio"
-                            defaultChecked
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          />
-                        ) : (
-                          <input
-                            id={paymentMethod.id}
-                            name="payment-type"
-                            type="radio"
-                            className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                          />
-                        )}
-
-                        <label
-                          htmlFor={paymentMethod.id}
-                          className="ml-3 block text-sm font-medium text-gray-700"
-                        >
-                          {paymentMethod.title}
-                        </label>
-                      </div>
-                    ))} */}
-                  </div>
-                </fieldset>
-
-                <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-                  <div className="col-span-4">
-                    <label
-                      htmlFor="card-number"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Card number
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="card-number"
-                        name="card-number"
-                        autoComplete="cc-number"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-span-4">
-                    <label
-                      htmlFor="name-on-card"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Name on card
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        id="name-on-card"
-                        name="name-on-card"
-                        autoComplete="cc-name"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-span-3">
-                    <label
-                      htmlFor="expiration-date"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Expiration date (MM/YY)
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="expiration-date"
-                        id="expiration-date"
-                        autoComplete="cc-exp"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="cvc"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      CVC
-                    </label>
-                    <div className="mt-1">
-                      <input
-                        type="text"
-                        name="cvc"
-                        id="cvc"
-                        autoComplete="csc"
-                        className="block w-full rounded-md h-8 border-[1px] border-gray-300 sm:text-sm"
-                        onChange={(e) => {
-                          setCVC(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Order summary */}
@@ -356,16 +233,16 @@ const ConfirmOrder = (props) => {
                   <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                     <dt className="text-base font-medium">Total</dt>
                     <dd className="text-base font-medium text-gray-900">
-                      {ttl}
+                      0.1 ETH
                     </dd>
                   </div>
                 </dl>
               </div>
-            </div>
+            </div> 
           </form>
           <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
             <button
-              onClick={onSubmit}
+              onClick={handlePaymentSubmit}
               className="w-full rounded-md cursor-pointer border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
             >
               Confirm order

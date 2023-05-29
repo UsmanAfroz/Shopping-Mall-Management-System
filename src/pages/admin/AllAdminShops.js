@@ -65,6 +65,18 @@ export default function AllShops() {
     setValue(newValue);
   };
 
+  const deleteShop = (id) => {
+    try {
+      let url = `http://localhost:2000/api/shop/delete?token=${token}&id=${id}`;
+      axios
+        .delete(url)
+        .then((r) => load())
+        .catch((e) => console.log(e));
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
 
   if (value === 0) {
     data.filter(e => e.Status === "APPROVED")
@@ -101,6 +113,7 @@ export default function AllShops() {
                     cnic={i["ownerPersonalInformation"]["cnic"]}
                     shopType={i["userType"]}
                     load={load}
+                    onDelete={deleteShop}
                   />
                 )) :
                   <>
@@ -128,6 +141,7 @@ export default function AllShops() {
                     shopType={i["userType"]}
                     isPending={true}
                     load={load}
+                    onDelete={deleteShop}
                   />
                 )) :
                   <div className="pending">
@@ -154,6 +168,7 @@ export default function AllShops() {
                     cnic={i["ownerPersonalInformation"]["cnic"]}
                     shopType={i["userType"]}
                     load={load}
+                    onDelete={deleteShop}
                   />
                 )) :
                   <>
