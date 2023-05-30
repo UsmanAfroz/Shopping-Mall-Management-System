@@ -12,7 +12,8 @@ const orderSchema = new Schema({
     DeliveryMethod:String,
     CVC : String,
     Amount: String,
-    uid:String
+    uid:String,
+    shopId: String,
 });
 
 export const Order = mongoose.model("order", orderSchema);  

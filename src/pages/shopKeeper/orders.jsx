@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TitleCard from "../../components/Cards/TitleCard";
 import ShopKeeperHeader from "../../components/header/ShopKeeperHeader";
-// import OrderCard from "./OrderCard";
+import OrderCard from './OrderCard'
 
 export default function AllOrders() {
   const navigate = useNavigate();
@@ -26,18 +26,6 @@ export default function AllOrders() {
   };
   console.log("data:::", data);
 
-  const deleteShop = (id) => {
-    try {
-      let url = `http://localhost:2000/api/shop/delete?token=${token}&id=${id}`;
-      axios
-        .delete(url)
-        .then((r) => load())
-        .catch((e) => console.log(e));
-    } catch (ex) {
-      console.log(ex);
-    }
-  };
-
   return (
     <>
       <ShopKeeperHeader />
@@ -47,8 +35,9 @@ export default function AllOrders() {
         <div class="flex items-center flex-wrap justify-center py-3">
         </div>
         <div class="container px-5 mx-auto">
+
           
-          
+          <OrderCard data={data} shopManagerId={shopManagerId}/>
         </div>
       </section>
       <div className="text-xl font-large justify-center items-center flex p-5 shopping-cart">

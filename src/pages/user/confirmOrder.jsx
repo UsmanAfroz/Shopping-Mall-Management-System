@@ -25,7 +25,8 @@ function classNames(...classes) {
 const ConfirmOrder = (props) => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log(state.product[0].count);
+
+  console.log("aaa",state.product[0].pid);
   let token = localStorage.getItem("token");
 
     const paymentAmount = "0.1"; 
@@ -53,30 +54,39 @@ const ConfirmOrder = (props) => {
 
   const handlePaymentSubmit = async (e) => {
     e.preventDefault();
+    const order = await axios.post(`http://localhost:2000/api/order/createorder?token=${token}`, {
+      phoneNumber:phoneNumber,
+      postalCode,
+      CVC: "3443",
+      product:state.product[0]._id,
+      shopId:state.product[0].pid
+     });
+//     if (provider) {
+//       try {
+//         await provider.send('eth_requestAccounts', []);
+//         const accounts = await provider.listAccounts();
+//         const signer = provider.getSigner(accounts[0]);
+//         setSigner(signer);
 
-    if (provider) {
-      try {
-        await provider.send('eth_requestAccounts', []);
-        const accounts = await provider.listAccounts();
-        const signer = provider.getSigner(accounts[0]);
-        setSigner(signer);
+//         const transactionResponse = await signer.sendTransaction({
+//           to: '0x758ac563d89dDe2078CfD77FFf832E21B989217e',
+//           value: ethers.utils.parseEther(paymentAmount),
+//         });
 
-        const transactionResponse = await signer.sendTransaction({
-          to: '0x758ac563d89dDe2078CfD77FFf832E21B989217e',
-          value: ethers.utils.parseEther(paymentAmount),
-        });
+//         await transactionResponse.wait();
 
-        await transactionResponse.wait();
-        
+     
 
-        console.log('Payment transaction successful:', transactionResponse);
-        navigate('/')
-      } catch (error) {
-        console.error('Payment transaction error:', error);
-      }
-    } else {
-      console.error('MetaMask provider not available');
-    }
+// console.log("order",order)
+
+//         console.log('Payment transaction successful:', transactionResponse);
+//         navigate('/')
+//       } catch (error) {
+//         console.error('Payment transaction error:', error);
+//       }
+//     } else {
+//       console.error('MetaMask provider not available');
+//     }
   };
   return (
     <>
