@@ -41,6 +41,7 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express-async-router": "^0.1.15",
+    "final-year-project": "file:",
     "fs": "^0.0.1-security",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
